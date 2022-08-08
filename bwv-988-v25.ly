@@ -109,8 +109,8 @@ bassOne = \relative c' {
 		\set fingeringOrientations = #'(right) 
 		< c\finger "⸢">16   
 	       [ bes32-3 a bes8 ] r8 g' [ g g ] | \break %9
-		g8 [ fis ] r8 f [ f f ] | % 10
-		f8 [ e ] r8 es [ es d ] | % 11
+		g8 [ fis-2 ] r8 f [ f f ] | % 10
+		f8-1 [ e\finger "2 - 1" ] r8 es [ es d ] | % 11
 		d8 [ cis ] r4 r4 | % 12
 		r8 d8 [ d es ] es4 | % 13
 		r8 e8 [ e f ] f4 | % 14
@@ -158,8 +158,8 @@ bassTwo = \relative g {
 		cis8-5 [ d-5 ] r8 d [ d d-4 ] | % 7
 		g,4 r8 g [ bes-4 d-2 ] | % 8
 		g8.-5 [ d'16-2 ] g8 [ f! es! d\finger "4 - 3" ] | % 9
-		cis8 [ a d c bes a ] | % 10
-		g8 [ c ] f, [ fis g gis ] | % 11
+		cis8-4 [ a-5 d\finger "3 - 2" c bes\finger "4 - 3" a ] | % 10
+		g8-5 [ c-3 ] f, [ fis-4 g-5 gis ] | % 11
 		a8 [ bes a g f e ] | % 12
 		f4 r8 fis8 [ fis g ] | % 13
 		g4 r8 gis8 [ gis a ] | % 14
