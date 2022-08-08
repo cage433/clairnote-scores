@@ -46,7 +46,7 @@ soprano = \relative d'' {
 		\times 2/3 { bes16-4 [ a-3 d,-1] } 
 		\times 2/3 { es16-4 [ b-1 c-3 ~ ] } | \noBreak% 7
 		c16 [ bes!32-2 a bes8-3 ] r4 r4 | \noBreak% 8
-		r32 d32-2 [ e fis g-1 bes  a16 ~ ] a16 [ bes8 b16-1 ] c16 [ cis8 d16-1 ] | % 9
+		r32 d32-2 [ e fis g-1 bes  a16 ~ ] a16 [ bes8 b16-1 ] c16 [ cis8 d16-1 ] | \break % 9
 		dis16-2 [ e-1 ~ e32 bes'-4 a-3 g-1 ] fis-3 [ e d8 d16 ] d' [ cis8-3 c16-2 ] | % 10
 		b16-1 [ bes-4 ~ bes32 a gis16 ~ ] gis [ a-3 ~ a32 d,-1 c-3 bes ] c-4 [ a-2 bes-4 g!-3 f-2 e f d' ] | \noBreak% 11
 		f,32 \prallprall\finger "3/2" [ e f16 e8 ] r32 d32-1 [ cis-2 d-1 e f g-1 a ] bes [ a d16-5 ~ d32 cis-3 e16-5 ~ ] | % 12
@@ -108,7 +108,7 @@ bassOne = \relative c' {
 		g[ d8 es16 ~ ] es32 [ d g16 ~ g32-3 fis! c'16\finger "5 - 1"  ~ ] | % 8
 		\set fingeringOrientations = #'(right) 
 		< c\finger "⸢">16   
-	       [ bes32 a bes8 ] r8 g' [ g g ] | %9
+	       [ bes32-3 a bes8 ] r8 g' [ g g ] | \break %9
 		g8 [ fis ] r8 f [ f f ] | % 10
 		f8 [ e ] r8 es [ es d ] | % 11
 		d8 [ cis ] r4 r4 | % 12
@@ -157,7 +157,7 @@ bassTwo = \relative g {
 		b8 [ c ] r8 c8 [ cis-5 cis ] | % 6
 		cis8-5 [ d-5 ] r8 d [ d d-4 ] | % 7
 		g,4 r8 g [ bes-4 d-2 ] | % 8
-		g8.-5ß [ d'16 ] g8 [ f! es! d ] | % 9
+		g8.-5 [ d'16-2 ] g8 [ f! es! d\finger "4 - 3" ] | % 9
 		cis8 [ a d c bes a ] | % 10
 		g8 [ c ] f, [ fis g gis ] | % 11
 		a8 [ bes a g f e ] | % 12
