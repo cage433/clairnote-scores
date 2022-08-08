@@ -132,8 +132,8 @@ bassOne = \relative c' {
 		r8 f! [ f ges ] ges4 | % 22
 		r8 g! [ g as ] as4 ~ | % 23
 		as8 [ g!16 f ] g8. [ a32 b ] c [ f, as8 g16 ] | % 24
-		f8 [ es ] r8 \clef "bass" g [ f es ] | % 25
-		d4 r8 f8 [ es des ] | % 26
+		f8 [ es ] r8  g [ f es ] | % 25
+		\clef "bass" d4 r8 f8 [ es des ] | % 26
 		c4 r8 es16 [ d ] c8 [ bes ] | % 27
 		a8. [ a16 ] d8 [ c bes a ] | % 28
 		d,8 [ fis fis g g as ] | % 29
@@ -182,18 +182,18 @@ bassTwo = \relative g {
 		as4-5 r8 a8 [ a bes ] | % 22
 		bes4-5 r8 bes8 [ d bes ] | % 23
 		es4-4 r8 f8-4 [ es\finger "5 - 4"  d\finger "5 - 4" ] | % 24
-		c4 r8 \clef "bass" c8 [ c c ] | % 25
-		c8 [ b ] r8 bes8 [ bes! bes ] | % 26
-		bes8 [ a! ] r8 as8 [ as g ] | % 27
-		g8 [ fis ] r8 fis8 [ g c, ] | % 28
+		c4 r8 c8 [ c c ] | % 25
+		\clef "bass" c8-4 [ b-5 ] r8 bes8-5 [ bes! bes ] | % 26
+		bes8-4 [ a! ] r8 as8-5 [ as g ] | % 27
+		g8-4 [ fis-5 ] r8 fis8-4 [ g-3 c,\finger "5 - 4" ] | % 28
 		bes4 r8 bes8 [ bes b ] | % 29
-		b16 [ d c8 ] r8 c8 [ c cis ] | % 30
+		b16-5 [ d-4 c8-5 ] r8 c8-5 [ c cis ] | % 30
 		cis16 [ e d8 ] r8 d8 d [ d ] | % 31
 	} %end repeated section
 	
 	\alternative {
-		{ g4 ~ g8 [ d ] g,16 [ a' bes c ] |} % 32
-		{ g4 ~ g16 [ fis g d ] g,4 |} % 32
+		{ g4-3 ~ g8 [ d\finger "5 - 1" ] g,16 [ a' bes c ] |} % 32
+		{ g4 ~ g16 [ fis g-1 d ] g,4 |} % 32
 	}
 }
 
