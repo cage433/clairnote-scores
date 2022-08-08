@@ -13,20 +13,20 @@
 #(set-global-staff-size 19)
 
 \header {
-	title = "Clavierübung Vierter Teil Aria mit 30 Veränderungen"
-	subtitle = "\"Goldberg Variationen\""
-	piece = "Variatio 25. a 2 Clav."
-	mutopiatitle = "Goldberg Variations - 25"
-	composer = "Johann Sebastian Bach (1685-1750)"
-	mutopiacomposer = "BachJS"
+	title = "Goldberg Variation 25"
+	%subtitle = "\"Goldberg Variationen\""
+	%piece = "Variatio 25. a 2 Clav."
+	%mutopiatitle = "Goldberg Variations - 25"
+	%composer = "Johann Sebastian Bach (1685-1750)"
+	%mutopiacomposer = "BachJS"
 	opus = "BWV 988"
-	date = "1741"
+	%date = "1741"
 	mutopiainstrument = "Harpsichord,Clavichord"
 	style = "Baroque"
 	source = "Bach-Gesellschaft Edition 1853 Band 3"
 	copyright = "Creative Commons Attribution-ShareAlike 3.0"
 	maintainer = "Hajo Dezelski"
-	maintainerEmail = "dl1sdz (at) gmail.com"
+	%maintainerEmail = "dl1sdz (at) gmail.com"
 
  footer = "Mutopia-2013/01/22-1419"
  tagline = \markup { \override #'(box-padding . 1.0) \override #'(baseline-skip . 2.7) \box \center-column { \small \line { Sheet music from \with-url #"http://www.MutopiaProject.org" \line { \concat { \teeny www. \normalsize MutopiaProject \teeny .org } \hspace #0.5 } • \hspace #0.5 \italic Free to download, with the \italic freedom to distribute, modify and perform. } \line { \small \line { Typeset using \with-url #"http://www.LilyPond.org" \line { \concat { \teeny www. \normalsize LilyPond \teeny .org }} by \concat { \maintainer . } \hspace #0.5 Copyright © 2013. \hspace #0.5 Reference: \footer } } \line { \teeny \line { Licensed under the Creative Commons Attribution-ShareAlike 3.0 (Unported) License, for details \concat { see: \hspace #0.3 \with-url #"http://creativecommons.org/licenses/by-sa/3.0" http://creativecommons.org/licenses/by-sa/3.0 } } } } }
@@ -111,15 +111,15 @@ bassOne = \relative c' {
 	       [ bes32-3 a bes8 ] r8 g' [ g g ] | \break %9
 		g8 [ fis-2 ] r8 f [ f f ] | % 10
 		f8-1 [ e\finger "2 - 1" ] r8 es [ es d ] | % 11
-		d8 [ cis ] r4 r4 | % 12
-		r8 d8 [ d es ] es4 | % 13
-		r8 e8 [ e f ] f4 | % 14
-		r8 fis8 [ fis g ] g4 ~ | % 15
+		d8-1 [ cis-2 ] r4 r4 | % 12
+		r8 d8-1 [ d-2 es-1 ] es4 | % 13
+		r8 e8-1 [ e-2 f ] f4 | % 14
+		r8 fis8-2 [ fis g ] g4 ~ | % 15
 	} %end of repeated section
 
 	\alternative { 
-		{ g8 [ fis16 e ] fis4 fis4\rest }
-		{ g8 [ fis16 e ] fis4 r4 }
+		{ g8 [ fis16-2 e-1 ] fis4-2 fis4\rest }
+		{ g8 [ fis16-2 e-1 ] fis4-2 r4 }
 	}
  
 	\repeat volta 2 { %begin repeated section
@@ -160,15 +160,15 @@ bassTwo = \relative g {
 		g8.-5 [ d'16-2 ] g8 [ f! es! d\finger "4 - 3" ] | % 9
 		cis8-4 [ a-5 d\finger "3 - 2" c bes\finger "4 - 3" a ] | % 10
 		g8-5 [ c-3 ] f, [ fis-4 g-5 gis ] | % 11
-		a8 [ bes a g f e ] | % 12
-		f4 r8 fis8 [ fis g ] | % 13
-		g4 r8 gis8 [ gis a ] | % 14
-		a4 r8 a8 [ cis a ] | % 15
+		a8-5 [ bes-3 a-1 g f e ] | % 12
+		f4\finger "3 - 5" r8 fis8-5 [ fis g-4 ] | % 13
+		g4-5 r8 gis8-5 [ gis a-4 ] | % 14
+		a4-5 r8 a8 [ cis-3 a ] | % 15
 	} %end of repeated section
 
 	\alternative { 
-		{ d4. c8 [ bes a ] | } % 16
-		{ d4. a8 d,4 | } % 16
+		{ d4.-3 c8-4 [ bes\finger "5 - 3" a ] | } % 16
+		{ d4.-3 a8\finger "5 - 1" d,4 | } % 16
 	}
  
 	\repeat volta 2 { %begin repeated section
