@@ -91,15 +91,24 @@ soprano = \relative d'' {
 bassOne = \relative c' {
 	\repeat volta 2 { %begin repeated section
 		\stemUp
-		bes4-3 r8 d8 [ c!\finger "2--1" bes ] | % 1
+		bes4-3 r8 d8 [ c!\finger "2 - 1" bes ] | % 1
 		a4-1 r8 c8 [ bes! as ] | % 2
 		g4 r8 bes8-2 [ a-1 g-2 ~ ] | % 3
-		g8 [ fis16 e ] fis [ a8 c16 ~ ] c [ fis,8 a16 ~ ] | % 4
-		a16 [ fis g8 ] r8 g8 d16 [ f g as ] | % 5
-		as8 [ g ] r8 a e16 [ g a bes ] | % 6
-		bes8 [ a ] r8 a [ g fis ~ ] | % 7
-		fis8 [ g16 fis ] g [ d8 es16 ~ ] es32 [ d g16 ~ g32 fis! c'16  ~ ] | % 8
-		c16 [ bes32 a bes8 ] r8 g' [ g g ] | %9
+		g8-2 [ fis16 e ] fis [ a8-2 c16-3 ~ ] c [ fis,8-2 a16 ~ ] | % 4
+		a16 [ fis g8 ] r8 g8 d16-3 [ f-2 g as-2 ] | % 5
+		as8-2 [ g-1 ] r8 a-1 e16-3 [ g-2 a-1 bes-2 ] | % 6
+		bes8-2 [ a-1 ] r8 a [ g\finger "2--1" fis\finger "2 - 1" ~ ] | % 7
+		fis8 
+		[
+		\set fingeringOrientations = #'(left) 
+		< g\finger "⸤">16  fis 
+		]
+		
+	
+		g[ d8 es16 ~ ] es32 [ d g16 ~ g32-3 fis! c'16\finger "5 - 1"  ~ ] | % 8
+		\set fingeringOrientations = #'(right) 
+		< c\finger "⸢">16   
+	       [ bes32 a bes8 ] r8 g' [ g g ] | %9
 		g8 [ fis ] r8 f [ f f ] | % 10
 		f8 [ e ] r8 es [ es d ] | % 11
 		d8 [ cis ] r4 r4 | % 12
@@ -143,12 +152,12 @@ bassTwo = \relative g {
 		g4-5 r8 g8 [ g g-4 ] | % 1
 		g8-3 [ fis-4 ] b, \rest f'-5 [ f f ] | % 2
 		f8-4 [ e-5 ] b8\rest es8 [ es es-4 ] | % 3
-		d4 r8 es8 [ d  c ] | % 4
-		bes4 r8 bes8 [ b b ] | % 5
-		b8 [ c ] r8 c8 [ cis cis ] | % 6
-		cis8 [ d ] r8 d [ d d ] | % 7
-		g,4 r8 g [ bes d ] | % 8
-		g8. [ d'16 ] g8 [ f! es! d ] | % 9
+		d4-5 r8 es8-4 [ d-5  c-4 ] | % 4
+		bes4-5 r8 bes8 [ b-5 b ] | % 5
+		b8 [ c ] r8 c8 [ cis-5 cis ] | % 6
+		cis8-5 [ d-5 ] r8 d [ d d-4 ] | % 7
+		g,4 r8 g [ bes-4 d-2 ] | % 8
+		g8.-5ß [ d'16 ] g8 [ f! es! d ] | % 9
 		cis8 [ a d c bes a ] | % 10
 		g8 [ c ] f, [ fis g gis ] | % 11
 		a8 [ bes a g f e ] | % 12
