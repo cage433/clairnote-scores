@@ -51,7 +51,7 @@ soprano = \relative d'' {
 		b16-1 [ bes-4 ~ bes32 a gis16 ~ ] gis [ a-3 ~ a32 d,-1 c-3 bes ] c-4 [ a-2 bes-4 g!-3 f-2 e f d' ] | \noBreak% 11
 		f,32 \prallprall\finger "3/2" [ e f16 e8 ] r32 d32-1 [ cis-2 d-1 e f g-1 a ] bes [ a d16-5 ~ d32 cis-3 e16-5 ~ ] | % 12
 		e16-5 [ a,-1 \appoggiatura bes16-3 a32 gis-2 a16 ] \once \override Slur #'direction = #UP  \appoggiatura a16 a'8\finger "5--3" ~ [ a32 bes (a gis ) ] a-. [ d,-1 c-3 bes c-. c (bes a ) ] | % 13
-		a16-1 [ bes \appoggiatura c16 bes32 a bes16 ] bes'8 ~ [ bes32 es,!-2 d cis-2 ] d-1 [ c'! b8 d,16 ] | \break% 14
+		a16-1 [ bes \appoggiatura c16 bes32 a bes16 ] bes'8 ~ [ bes32 es,!-2 d cis-2 ] d-1 [ c'! b8 d,16 ] | % 14
 		cis16-3 [ bes!8 a16 ] es'!16-4 [ d ~ d32 cis! e-1 g-2 ] bes16-4 [ a ~ a64 g f-1 e-4 d32-3 cis ] | % 15 
 	} %end of repeated section
 	
@@ -61,8 +61,9 @@ soprano = \relative d'' {
 	}
 
  	\repeat volta 2 { %begin repeated section
-		r16 a'16 [ \appoggiatura  bes16  a32 gis a16 ] es! [ d ~ d32 e fis g ] a [ c, es8 d16 ~ ] | % 17
-		d16 [ f  \appoggiatura g16 f32 es f16 ] as, [ g ~ g32 a b c ] d [ f, as8 g16 ~ ] | % 18
+ 	    \pageBreak
+		r16 a'16-3 [ \appoggiatura  bes16  a32 gis a16-5 ] es! [ d ~ d32 e fis g ] a-5 [ c, es8-2 d16-1 ~ ] | % 17
+		d16-3 [ f  \appoggiatura g16 f32 es f16-5 ] as, [ g ~ g32 a b c ] d [ f, as8 g16-1 ~ ] | \noBreak% 18
 		g16 [ c8 b16 ] c32 [ es des8 c16 ~ ] c32 [ f es16 ~ es32 f es d ] | % 19
 		es32 [ a! ( bes16 es, d ) ] r4 r4 | % 20
 		r16 bes16 [ \appoggiatura ces16 bes32 as bes16 ] bes [ bes' ~ bes32 ces bes as ] bes16 [ des, ~ des32 ces bes16 ~ ] | % 21
