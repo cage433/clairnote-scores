@@ -10,7 +10,7 @@
 
 #(set-default-paper-size "a4")
 
-#(set-global-staff-size 19)
+#(set-global-staff-size 18)
 
 \header {
 	title = "Goldberg Variation 25"
@@ -24,12 +24,12 @@
 	mutopiainstrument = "Harpsichord,Clavichord"
 	style = "Baroque"
 	source = "Bach-Gesellschaft Edition 1853 Band 3"
-	copyright = "Creative Commons Attribution-ShareAlike 3.0"
+	%copyright = "Creative Commons Attribution-ShareAlike 3.0"
 	maintainer = "Hajo Dezelski"
 	%maintainerEmail = "dl1sdz (at) gmail.com"
 
- footer = "Mutopia-2013/01/22-1419"
- tagline = \markup { \override #'(box-padding . 1.0) \override #'(baseline-skip . 2.7) \box \center-column { \small \line { Sheet music from \with-url #"http://www.MutopiaProject.org" \line { \concat { \teeny www. \normalsize MutopiaProject \teeny .org } \hspace #0.5 } • \hspace #0.5 \italic Free to download, with the \italic freedom to distribute, modify and perform. } \line { \small \line { Typeset using \with-url #"http://www.LilyPond.org" \line { \concat { \teeny www. \normalsize LilyPond \teeny .org }} by \concat { \maintainer . } \hspace #0.5 Copyright © 2013. \hspace #0.5 Reference: \footer } } \line { \teeny \line { Licensed under the Creative Commons Attribution-ShareAlike 3.0 (Unported) License, for details \concat { see: \hspace #0.3 \with-url #"http://creativecommons.org/licenses/by-sa/3.0" http://creativecommons.org/licenses/by-sa/3.0 } } } } }
+ %footer = "Mutopia-2013/01/22-1419"
+ %tagline = \markup { \override #'(box-padding . 1.0) \override #'(baseline-skip . 2.7) \box \center-column { \small \line { Sheet music from \with-url #"http://www.MutopiaProject.org" \line { \concat { \teeny www. \normalsize MutopiaProject \teeny .org } \hspace #0.5 } • \hspace #0.5 \italic Free to download, with the \italic freedom to distribute, modify and perform. } \line { \small \line { Typeset using \with-url #"http://www.LilyPond.org" \line { \concat { \teeny www. \normalsize LilyPond \teeny .org }} by \concat { \maintainer . } \hspace #0.5 Copyright © 2013. \hspace #0.5 Reference: \footer } } \line { \teeny \line { Licensed under the Creative Commons Attribution-ShareAlike 3.0 (Unported) License, for details \concat { see: \hspace #0.3 \with-url #"http://creativecommons.org/licenses/by-sa/3.0" http://creativecommons.org/licenses/by-sa/3.0 } } } } }
 }
 
 soprano = \relative d'' {
@@ -64,10 +64,10 @@ soprano = \relative d'' {
  	    \pageBreak
 		r16 a'16-3 [ \appoggiatura  bes16  a32 gis a16-5 ] es! [ d ~ d32 e fis g ] a-5 [ c, es8-2 d16-1 ~ ] | % 17
 		d16-3 [ f  \appoggiatura g16 f32 es f16-5 ] as, [ g ~ g32 a b c ] d [ f, as8 g16-1 ~ ] | \noBreak% 18
-		g16 [ c8 b16 ] c32 [ es des8 c16 ~ ] c32 [ f es16 ~ es32 f es d ] | % 19
-		es32 [ a! ( bes16 es, d ) ] r4 r4 | % 20
-		r16 bes16 [ \appoggiatura ces16 bes32 as bes16 ] bes [ bes' ~ bes32 ces bes as ] bes16 [ des, ~ des32 ces bes16 ~ ] | % 21
-		bes16 [ ces  \appoggiatura des16 ces32 bes ces16 ] ces [ ces' ~ ces32 fes, es d] es [ des' c8 es,16 ] | % 22
+		g16 [ c8-3 b16 ] c32-1 [ es des8 c16 ~ ] c32 [ f-3 es16 ~ es32 f es d ] | % 19
+		es32-2 [ a!-4 ( bes16-5 es, d ) ] r4 r4 | % 20
+		r16 bes16-3 [ \appoggiatura ces16 bes32 as bes16 ] bes-1 [ bes'-4 ~ bes32 ces bes as ] bes16 [ des, ~ des32 ces-3 bes16 ~ ] | \noBreak% 21
+		bes16-2 [ ces-1  \appoggiatura des16-3 ces32-1 bes-2 ces16 ] ces-1 [ ces' ~ ces32 fes, es-2 d] es [ des' c8 es,16-1 ] | % 22
 		d!16 [ ces8 bes16 ] fes' [ es ~ es32 d f as ] ces16 [ bes ~ bes64 as64 ges64 f64 es32 d ] | % 23
 		d8\( [ es8\) ] r4 r4 | % 24
 		r16 g,16 [ \appoggiatura as16 g32 fis g16 ] \once \override Slur #'direction = #UP \appoggiatura g16 es'8 ~ [ es32 d c bes ] as!16 [ g8 fis!16 ] ~ | % 25
