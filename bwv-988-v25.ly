@@ -174,14 +174,14 @@ bassTwo = \relative g {
  
 	\repeat volta 2 { %begin repeated section
 		\clef "treble" 
-		d'4 r8 c [ c bes ] | % 17
-		bes8 [ g16 a ] bes8 [ b b c ] | % 18
-		c4 r8 g8 [ as a ] | % 19
-		bes4 r8 ces8 [ bes as] | % 20
-		ges4 r8 g8 [ g  as ] | % 21
-		as4 r8 a8 [ a bes ] | % 22
-		bes4 r8 bes8 [ d bes ] | % 23
-		es4 r8 f8 [ es  d ] | % 24
+		d'4-3 r8 c-4 [ c bes-5 ] | % 17
+		bes8-4 [ g16 a ] bes8 [ b-4 b-5 c-4 ] | % 18
+		c4 r8 g8-5 [ as\finger "4 - 5" a\finger "4 - 5" ] | % 19
+		bes4\finger "4 - 5" r8 ces8-4 [ bes\finger "5 --- 3" as-4] | % 20
+		ges4-5 r8 g8 [ g  as-4 ] | % 21
+		as4-5 r8 a8 [ a bes ] | % 22
+		bes4-5 r8 bes8 [ d bes ] | % 23
+		es4-4 r8 f8-4 [ es\finger "5 - 4"  d\finger "5 - 4" ] | % 24
 		c4 r8 \clef "bass" c8 [ c c ] | % 25
 		c8 [ b ] r8 bes8 [ bes! bes ] | % 26
 		bes8 [ a! ] r8 as8 [ as g ] | % 27
