@@ -91,9 +91,9 @@ soprano = \relative d'' {
 bassOne = \relative c' {
 	\repeat volta 2 { %begin repeated section
 		\stemUp
-		bes4 r8 d8 [ c! bes ] | % 1
-		a4 r8 c8 [ bes! as ] | % 2
-		g4 r8 bes8 [ a g ~ ] | % 3
+		bes4-3 r8 d8 [ c!\finger "2--1" bes ] | % 1
+		a4-1 r8 c8 [ bes! as ] | % 2
+		g4 r8 bes8-2 [ a-1 g-2 ~ ] | % 3
 		g8 [ fis16 e ] fis [ a8 c16 ~ ] c [ fis,8 a16 ~ ] | % 4
 		a16 [ fis g8 ] r8 g8 d16 [ f g as ] | % 5
 		as8 [ g ] r8 a e16 [ g a bes ] | % 6
@@ -140,9 +140,9 @@ bassOne = \relative c' {
 bassTwo = \relative g {
 	\repeat volta 2 { %begin repeated section
 		\stemDown	 
-		g4 r8 g8 [ g g ] | % 1
-		g8 [ fis ] b, \rest f' [ f f ] | % 2
-		f8 [ e ] b8\rest es8 [ es es ] | % 3
+		g4-5 r8 g8 [ g g-4 ] | % 1
+		g8-3 [ fis-4 ] b, \rest f'-5 [ f f ] | % 2
+		f8-4 [ e-5 ] b8\rest es8 [ es es-4 ] | % 3
 		d4 r8 es8 [ d  c ] | % 4
 		bes4 r8 bes8 [ b b ] | % 5
 		b8 [ c ] r8 c8 [ cis cis ] | % 6
