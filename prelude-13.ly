@@ -30,7 +30,7 @@ global = {
 \include "articulate.ly"
 
 clairnote-type = dn
-\include "include/clairnote.ly"
+%\include "include/clairnote.ly"
 
                  
 upper = \new Voice \relative c' {
