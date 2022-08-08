@@ -1,14 +1,14 @@
 \version "2.16.1"
 
 \paper {
-	top-system-spacing #'basic-distance = #0.0
-	%indent = 0.0
-	line-width = 18.0\cm
+	%top-system-spacing #'basic-distance = #0.0
+	indent = 0.0
+	%line-width = 20.0\cm
 	ragged-bottom = ##f
 	ragged-last-bottom = ##f
 }
 
-% #(set-default-paper-size "a4")
+#(set-default-paper-size "a4")
 
 #(set-global-staff-size 19)
 
@@ -34,14 +34,14 @@
 
 soprano = \relative d'' {
 	\repeat volta 2 { %begin repeated section
-		r16 d16 [ \grace es16 d32 cis d16 ] \once \override Slur #'direction = #UP \appoggiatura d16 bes'8 ~ [ bes32 a g f ] es16 [ d8 cis!16 ~ ] | % 1
-		cis16 [ c \grace d!16 c32 b c16 ]  \appoggiatura  f16 as8 ~ [ as32 g f es ] des16 [ c8 b!16 ~ ] | % 2
-		b16 [ bes  \appoggiatura  c16 bes32 a bes16 ] fis' [ g8 cis,16 ~ ] cis [ d8 g,16 ] | % 3
-		g16 [ a32 bes a8 ] r4 r4 | % 4
-		r16 d,16 [ \grace ees16 d32 cis d16 ] d'8 ~ [ d32 c! bes a ] g [ f as16 ~ as32 d, f16 ~ ] | % 5
-		f16 [ es  \appoggiatura  f16 es32 d es16 ] es'8 ~ [ es32 d c bes ] a32 [ g bes16 ~ bes32 e,32 g16 ~] | % 6
-		g16 [ fis \grace g16 fis32 e fis16 ] 
-		\times 2/3 { b16 [ c es! ] } 
+		r16 d16-3 [ \appoggiatura es16 d32 cis d16 ] \once \override Slur #'direction = #UP \appoggiatura d16-1 bes'8-4 ~ [ bes32 a g f ] es16 [ d8 cis!16 ~ ] | \noBreak % 1
+		cis16-2 [ c-1 \appoggiatura d16-3 c32 b c16 ]  \appoggiatura  c16-1 as'8-4 ~ [ as32 g f-1 es-4 ] des16 [ c8 b16-1 ~ ] | \noBreak % 2
+		b16-1 [ bes-2  \appoggiatura  c16-4 bes32 a bes16-2 ] fis' [ g8 cis,16 ~ ] cis [ d8 g,16 ] |% 3
+		g16-1 [ a32 bes a8 ] r4 r4 | \noBreak % 4
+		r16 d,16-3 [ \appoggiatura ees16 d32 cis d16-3 ] \appoggiatura d16-1 d'8 ~ [ d32 c! bes a ] g-1 [ f-2 as16-4 ~ as32 d, f16-3 ~ ] |  \noBreak% 5
+		f16 [ es  \appoggiatura  f16 es32 d es16 ] \appoggiatura es16-1  es'8 ~ [ es32 d c bes ] a32 [ g-2 bes16 ~ bes32 e,32 g16-3 ~] |  % 6
+		g16-3 [ fis \appoggiatura g16 fis32 e fis16 ] 
+		\times 2/3 { b16-1 [ c-2 es!-4 ] } 
 		\times 2/3 { cis16  [d fis,! ] } 
 		\times 2/3 { bes16 [ a d,] } 
 		\times 2/3 { es16 [ b c ~ ] } | % 7
