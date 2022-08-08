@@ -42,14 +42,14 @@ soprano = \relative d'' {
 		f16 [ es  \appoggiatura  f16 es32 d es16 ] \appoggiatura es16-1  es'8 ~ [ es32 d c bes ] a32 [ g-2 bes16 ~ bes32 e,32 g16-3 ~] |  % 6
 		g16-3 [ fis \appoggiatura g16 fis32 e fis16 ] 
 		\times 2/3 { b16-1 [ c-2 es!-4 ] } 
-		\times 2/3 { cis16  [d fis,! ] } 
-		\times 2/3 { bes16 [ a d,] } 
-		\times 2/3 { es16 [ b c ~ ] } | % 7
-		c16 [ bes!32 a bes8 ] r4 r4 | % 8
-		r32 d32 [ e fis g bes a16 ~ ] a16 [ bes8 b16 ] c16 [ cis8 d16 ] | % 9
-		dis16 [ e ~ e32 bes' a g ] fis [ e d8 d16 ] d' [ cis8 c16 ] | % 10
-		b16 [ bes ~ bes32 a gis16 ~ ] gis [ a ~ a32 d, c bes ] c [ a bes g! f e f d' ] | % 11
-		f,32 \prallprall [ e f16 e8 ] r32 d32 [ cis d e f g a ] bes [ a d16 ~ d32 cis e16 ~ ] | % 12
+		\times 2/3 { cis16-3  [d-5 fis,!-2 ] } 
+		\times 2/3 { bes16-4 [ a-3 d,-1] } 
+		\times 2/3 { es16-4 [ b-1 c-3 ~ ] } | % 7
+		c16 [ bes!32-2 a bes8-3 ] r4 r4 | \noBreak% 8
+		r32 d32-2 [ e fis g-1 bes  a16 ~ ] a16 [ bes8 b16-1 ] c16 [ cis8 d16-1 ] | % 9
+		dis16-2 [ e-1 ~ e32 bes'-4 a-3 g-1 ] fis-3 [ e d8 d16 ] d' [ cis8-3 c16-2 ] | % 10
+		b16-1 [ bes-4 ~ bes32 a gis16 ~ ] gis [ a-3 ~ a32 d,-1 c-3 bes ] c-4 [ a-2 bes-4 g!-3 f-2 e f d' ] | \noBreak% 11
+		f,32 \prallprall\finger "3/2" [ e f16 e8 ] r32 d32 [ cis d e f g a ] bes [ a d16 ~ d32 cis e16 ~ ] | % 12
 		e16 [ a, \grace bes16 a32 gis a16 ] \once \override Slur #'direction = #UP  \appoggiatura a16 a'8 ~ [ a32 bes (a gis ) ] a-. [ d, c bes c-. c (bes a ) ] | % 13
 		a16 [ bes \grace c16 bes32 a bes16 ] bes'8 ~ [ bes32 es,! d cis ] d [ c'! b8 d,16 ] | % 14
 		cis16 [ bes!8 a16 ] es'!16 [ d ~ d32 cis! e g ] bes16 [ a ~ a64 g f e d32 cis ] | % 15 
