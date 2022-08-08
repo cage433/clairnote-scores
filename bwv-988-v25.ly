@@ -68,10 +68,10 @@ soprano = \relative d'' {
 		es32-2 [ a!-4 ( bes16-5 es, d ) ] r4 r4 | % 20
 		r16 bes16-3 [ \appoggiatura ces16 bes32 as bes16 ] bes-1 [ bes'-4 ~ bes32 ces bes as ] bes16 [ des, ~ des32 ces-3 bes16 ~ ] | \noBreak% 21
 		bes16-2 [ ces-1  \appoggiatura des16-3 ces32-1 bes-2 ces16 ] ces-1 [ ces' ~ ces32 fes, es-2 d] es [ des' c8 es,16-1 ] | % 22
-		d!16-3 [ ces8 bes16 ] fes'-4 [ es-3 ~ es32 d-1 f as ] ces16 [ bes ~ bes64 as64 ges64 f64 es32-3 d ] | % 23
+		d!16-3 [ ces8 bes16 ] fes'-4 [ es-3 ~ es32 d-1 f as ] ces16 [ bes ~ bes64 as64 ges64 f64 es32-3 d ] | \noBreak% 23
 		d8-2\( [ es8\) ] r4 r4 | \noBreak % 24
 		r16 g,16-1 [ \appoggiatura as16-3 g32 fis g16 ] \once \override Slur #'direction = #UP \appoggiatura g16 es'8-4 ~ [ es32 d c-1 bes-3 ] as!16 [ g8 fis!16-3 ] ~ | % 25
-		fis16-3 [ f \appoggiatura g16-4 f32 e f16 ] des'8 ~ [ des32 c-1 bes-4 as ] ges16 [ f8 e!16-3 ~ ] | % 26
+		fis16-3 [ f \appoggiatura g16-4 f32 e f16 ] des'8 ~ [ des32 c-1 bes-4 as ] ges16 [ f8 e!16-3 ~ ] | \noBreak% 26
 		e16 [ es  \appoggiatura     f16  -\tweak Y-offset 4 -4   es32 d es16 ] c'8 ~ [ c32 bes as g-1 ] fis16-2 [ es' ~ es32 d cis16 ] | \noBreak % 27
 		cis16-4 [ (d) es, (d) ] r32 e32 [ fis g-1 a bes c-1 d ] es! [ d g16 ~ g32 fis-3 a16 ~ ] | % 28
 		a16-5 [ d,  \appoggiatura es16 d32 cis d16 ] d'8 ~ [ d32 c! bes a ] g [ d' f,16 ~ f32 es d c ] | % 29
@@ -80,7 +80,7 @@ soprano = \relative d'' {
 	} %end repeated section
 
 	\alternative {
-		{ \grace fis16  g4 r4 r4 |} % 32 % \grace fis16
+		{ \appoggiatura fis16  g4 r4 r4 |} % 32 % \grace fis16
 		{ g4 r4 r4 \bar "|." |}% 32 
 	}
 }
@@ -124,21 +124,21 @@ bassOne = \relative c' {
 	}
  
 	\repeat volta 2 { %begin repeated section
-		r8 f8 [ f fis fis g ] | % 17
-		g8 [ d ] r8 f8 [ f es ] | % 18
+		r8 f8 [ f fis-2 fis g ] | % 17
+		g8 [ d ] r8 f8 [ f es-2 ] | % 18
 		es8 [ d es e f ges ~] | % 19
-		ges8 [ f16 ges ] as [ d,8 es32 f ] ges [ es f8 ces16 ] | % 20
-		ces16 [ bes es8 ] es [ fes ] fes4 | % 21
+		ges8\finger "1 - 2" [ f16 ges ] as [ d,8 es32 f ] ges [ es f8 ces16 ] | % 20
+		ces16-2 [ bes es8 ] es [ fes ] fes4-2 | % 21
 		r8 f! [ f ges ] ges4 | % 22
 		r8 g! [ g as ] as4 ~ | % 23
-		as8 [ g!16 f ] g8. [ a32 b ] c [ f, as8 g16 ] | % 24
-		f8 [ es ] r8  g [ f es ] | % 25
-		\clef "bass" d4 r8 f8 [ es des ] | % 26
-		c4 r8 es16 [ d ] c8 [ bes ] | % 27
-		a8. [ a16 ] d8 [ c bes a ] | % 28
-		d,8 [ fis fis g g as ] | % 29
-		r8 g [ g a! a bes ] | % 30
-		r8 a [ a bes bes c ~ ] | % 31
+		as8 [ g!16 f ] g8.-2 [ a32-1 b-2 ] c [ f,-3 as8 g16-1 ] | % 24
+		f8-2 [ es ] r8  g [ f es ] | % 25
+		d4-1 r8 f8-1 [ es des ] | % 26
+		\clef "bass"  c4-1 r8 es16 [ d ] c8 [ bes ] | % 27
+		a8. [ a16 ] d8-1 [ c\finger "2 - 1" bes-2 a ] | % 28
+		d,8 [ fis fis g g-1 as-2 ] | % 29
+		r8 g [ g a! a-1 bes-2 ] | % 30
+		r8 a-1 [ a bes-2 bes c ~ ] | % 31
 	} %end repeated section
 
 	\alternative {
@@ -183,8 +183,8 @@ bassTwo = \relative g {
 		bes4-5 r8 bes8 [ d bes ] | % 23
 		es4-4 r8 f8-4 [ es\finger "5 - 4"  d\finger "5 - 4" ] | % 24
 		c4 r8 c8 [ c c ] | % 25
-		\clef "bass" c8-4 [ b-5 ] r8 bes8-5 [ bes! bes ] | % 26
-		bes8-4 [ a! ] r8 as8-5 [ as g ] | % 27
+		c8-4 [ b-5 ] r8 bes8-5 [ bes! bes ] | % 26
+		\clef "bass" bes8-4 [ a! ] r8 as8-5 [ as g ] | % 27
 		g8-4 [ fis-5 ] r8 fis8-4 [ g-3 c,\finger "5 - 4" ] | % 28
 		bes4 r8 bes8 [ bes b ] | % 29
 		b16-5 [ d-4 c8-5 ] r8 c8-5 [ c cis ] | % 30
