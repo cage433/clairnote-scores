@@ -4,8 +4,8 @@
 	%top-system-spacing #'basic-distance = #0.0
 	indent = 0.0
 	%line-width = 20.0\cm
-	ragged-bottom = ##f
-	ragged-last-bottom = ##f
+	ragged-bottom = ##t
+	ragged-last-bottom = ##t
 }
 
 #(set-default-paper-size "a4")
@@ -44,20 +44,20 @@ soprano = \relative d'' {
 		\times 2/3 { b16-1 [ c-2 es!-4 ] } 
 		\times 2/3 { cis16-3  [d-5 fis,!-2 ] } 
 		\times 2/3 { bes16-4 [ a-3 d,-1] } 
-		\times 2/3 { es16-4 [ b-1 c-3 ~ ] } | % 7
+		\times 2/3 { es16-4 [ b-1 c-3 ~ ] } | \noBreak% 7
 		c16 [ bes!32-2 a bes8-3 ] r4 r4 | \noBreak% 8
 		r32 d32-2 [ e fis g-1 bes  a16 ~ ] a16 [ bes8 b16-1 ] c16 [ cis8 d16-1 ] | % 9
 		dis16-2 [ e-1 ~ e32 bes'-4 a-3 g-1 ] fis-3 [ e d8 d16 ] d' [ cis8-3 c16-2 ] | % 10
 		b16-1 [ bes-4 ~ bes32 a gis16 ~ ] gis [ a-3 ~ a32 d,-1 c-3 bes ] c-4 [ a-2 bes-4 g!-3 f-2 e f d' ] | \noBreak% 11
 		f,32 \prallprall\finger "3/2" [ e f16 e8 ] r32 d32-1 [ cis-2 d-1 e f g-1 a ] bes [ a d16-5 ~ d32 cis-3 e16-5 ~ ] | % 12
 		e16-5 [ a,-1 \appoggiatura bes16-3 a32 gis-2 a16 ] \once \override Slur #'direction = #UP  \appoggiatura a16 a'8\finger "5--3" ~ [ a32 bes (a gis ) ] a-. [ d,-1 c-3 bes c-. c (bes a ) ] | % 13
-		a16 [ bes \appoggiatura c16 bes32 a bes16 ] bes'8 ~ [ bes32 es,! d cis ] d [ c'! b8 d,16 ] | % 14
-		cis16 [ bes!8 a16 ] es'!16 [ d ~ d32 cis! e g ] bes16 [ a ~ a64 g f e d32 cis ] | % 15 
+		a16-1 [ bes \appoggiatura c16 bes32 a bes16 ] bes'8 ~ [ bes32 es,!-2 d cis-2 ] d-1 [ c'! b8 d,16 ] | \break% 14
+		cis16-3 [ bes!8 a16 ] es'!16-4 [ d ~ d32 cis! e-1 g-2 ] bes16-4 [ a ~ a64 g f-1 e-4 d32-3 cis ] | % 15 
 	} %end of repeated section
 	
 	\alternative {
-		{cis8\( [ d\) ] r4 r4 }
-		{cis8\( [ d\) ] r4 r4 }
+		{cis8-2\( [ d\) ] r4 r4 }
+		{cis8-2\( [ d\) ] r4 r4 }
 	}
 
  	\repeat volta 2 { %begin repeated section
