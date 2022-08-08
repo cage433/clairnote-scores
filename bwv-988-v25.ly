@@ -68,11 +68,11 @@ soprano = \relative d'' {
 		es32-2 [ a!-4 ( bes16-5 es, d ) ] r4 r4 | % 20
 		r16 bes16-3 [ \appoggiatura ces16 bes32 as bes16 ] bes-1 [ bes'-4 ~ bes32 ces bes as ] bes16 [ des, ~ des32 ces-3 bes16 ~ ] | \noBreak% 21
 		bes16-2 [ ces-1  \appoggiatura des16-3 ces32-1 bes-2 ces16 ] ces-1 [ ces' ~ ces32 fes, es-2 d] es [ des' c8 es,16-1 ] | % 22
-		d!16 [ ces8 bes16 ] fes' [ es ~ es32 d f as ] ces16 [ bes ~ bes64 as64 ges64 f64 es32 d ] | % 23
-		d8\( [ es8\) ] r4 r4 | % 24
-		r16 g,16 [ \appoggiatura as16 g32 fis g16 ] \once \override Slur #'direction = #UP \appoggiatura g16 es'8 ~ [ es32 d c bes ] as!16 [ g8 fis!16 ] ~ | % 25
-		fis16 [ f \grace g16 f32 e f16 ] des'8 ~ [ des32 c bes as ] ges16 [ f8 e!16 ~ ] | % 26
-		e16 [ es  \appoggiatura f16 es32 d es16 ] c'8 ~ [ c32 bes as g ] fis16 [ es' ~ es32 d cis16 ] | % 27
+		d!16-3 [ ces8 bes16 ] fes'-4 [ es-3 ~ es32 d-1 f as ] ces16 [ bes ~ bes64 as64 ges64 f64 es32-3 d ] | % 23
+		d8-2\( [ es8\) ] r4 r4 | \noBreak % 24
+		r16 g,16-1 [ \appoggiatura as16-3 g32 fis g16 ] \once \override Slur #'direction = #UP \appoggiatura g16 es'8-4 ~ [ es32 d c-1 bes-3 ] as!16 [ g8 fis!16-3 ] ~ | % 25
+		fis16-3 [ f \appoggiatura g16-4 f32 e f16 ] des'8 ~ [ des32 c-1 bes-4 as ] ges16 [ f8 e!16-3 ~ ] | % 26
+		e16 [ es  \appoggiatura     f16  -\tweak Y-offset 4 -4   es32 d es16 ] c'8 ~ [ c32 bes as g-1 ] fis16-2 [ es' ~ es32 d cis16 ] | % 27
 		cis16 [ (d) es, (d) ] r32 e32 [ fis g a bes c d ] es! [ d g16 ~ g32 fis a16 ~ ] | % 28
 		a16 [ d,  \appoggiatura es16 d32 cis d16 ] d'8 ~ [ d32 c! bes a ] g [ d' f,16 ~ f32 es d c ] | % 29
 		d32 [ as' g f es d c b ] c [ f es d c bes a! g ] a [ d c bes a g fis e ] | % 30
