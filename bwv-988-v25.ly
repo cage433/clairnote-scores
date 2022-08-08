@@ -10,7 +10,7 @@
 
 #(set-default-paper-size "a4")
 
-#(set-global-staff-size 18)
+#(set-global-staff-size 19)
 
 \header {
 	title = "Goldberg Variation 25"
@@ -72,11 +72,11 @@ soprano = \relative d'' {
 		d8-2\( [ es8\) ] r4 r4 | \noBreak % 24
 		r16 g,16-1 [ \appoggiatura as16-3 g32 fis g16 ] \once \override Slur #'direction = #UP \appoggiatura g16 es'8-4 ~ [ es32 d c-1 bes-3 ] as!16 [ g8 fis!16-3 ] ~ | % 25
 		fis16-3 [ f \appoggiatura g16-4 f32 e f16 ] des'8 ~ [ des32 c-1 bes-4 as ] ges16 [ f8 e!16-3 ~ ] | % 26
-		e16 [ es  \appoggiatura     f16  -\tweak Y-offset 4 -4   es32 d es16 ] c'8 ~ [ c32 bes as g-1 ] fis16-2 [ es' ~ es32 d cis16 ] | % 27
-		cis16 [ (d) es, (d) ] r32 e32 [ fis g a bes c d ] es! [ d g16 ~ g32 fis a16 ~ ] | % 28
-		a16 [ d,  \appoggiatura es16 d32 cis d16 ] d'8 ~ [ d32 c! bes a ] g [ d' f,16 ~ f32 es d c ] | % 29
-		d32 [ as' g f es d c b ] c [ f es d c bes a! g ] a [ d c bes a g fis e ] | % 30
-		fis32 [ bes a g fis e d cis ] d [ g fis e d c bes a ] bes [ es d c bes a g fis ] | % 31	
+		e16 [ es  \appoggiatura     f16  -\tweak Y-offset 4 -4   es32 d es16 ] c'8 ~ [ c32 bes as g-1 ] fis16-2 [ es' ~ es32 d cis16 ] | \noBreak % 27
+		cis16-4 [ (d) es, (d) ] r32 e32 [ fis g-1 a bes c-1 d ] es! [ d g16 ~ g32 fis-3 a16 ~ ] | % 28
+		a16-5 [ d,  \appoggiatura es16 d32 cis d16 ] d'8 ~ [ d32 c! bes a ] g [ d' f,16 ~ f32 es d c ] | % 29
+		d32 [ as' g f es-3 d c b-2 ] c-1 [ f-4 es d c bes-3 a! g ] a [ d c bes a g fis-2 e-1 ] | % 30
+		fis32-2 [ bes-4 a-3 g-1 fis-3 e d cis ] d-1 [ g-4 fis e d c-3 bes a ] bes-2 [ es d c bes a g-3 fis ] | % 31	
 	} %end repeated section
 
 	\alternative {
