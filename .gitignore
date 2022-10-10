@@ -1,2 +1,4 @@
 *.pdf
 *.midi
+*.svg
+Makefile
