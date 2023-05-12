@@ -17,7 +17,7 @@
 global = {
   \key gis \minor
   \time 4/4
-  \accidentalStyle modern-cautionary
+  \accidentalStyle default
 }
 
 \paper {
@@ -94,8 +94,9 @@ upper = \new Voice \relative c' {
         dis8 fis16 eis			fis8 ais					r8 fis						r8 eis16 dis			|
         r8 eis16 dis			eis8	gis					r8 eis					r8 dis16 cisis			|
         r8 fis16 eis				fis dis  bis'8				r8 bis16 ais 				b gis gis'8~			|
-        gis8 fis32 eis dis16		cisis4~					cisis8 dis					r4					\bar ":|." 
-
+        gis8 fis32 eis dis16		cisis4~					cisis8 dis					r4					 
+     }
+      >> \bar ":|.|:"
 
       %bar 25
       dis16 eis fisis gis			ais e-1 dis-3 cis			bis cis dis a-1				gis-3 fis e dis			|
@@ -132,15 +133,50 @@ upper = \new Voice \relative c' {
      r8 <gis b> 				<a cis> <gis bis>			r8 <gis cis> 				<a fis'> <fis dis'>		|
      
      %bar 45
-     r8 <gis e>				<d fis> <cis eis>			
-     }
-   >> \oneVoice
-   
-   
-   
-   
-   
+     r8 <gis e'>				<d' fis> <cis eis> 			r8 <<
+                                                                                                         {
+                                                                                                           \voiceOne
+                                                                                                               ais'
+                                                                                                         }
+                                                                                                         \new Voice {
+                                                                                                           \voiceThree 
+                                                                                                             e16 dis
+                                                                                                         }
+                                                                                                         \new Voice {
+                                                                                                           \voiceTwo
+                                                                                                           cis 
+                                                                                                         }
+                                                                                                     >>  						<cis e ais>8 <cis e ais>	|
+     <cis e ais>4				r16 e-4 dis cis				b cis dis gis,				b-4 ais gis fisis			|
+     gis b gis b				fis dis' fis, dis'				eis, cis' eis, cis'				cis, b' cis, b'			|
+     fis ais fis ais				e cis' e, cis'				dis, b' dis, b'				b, ais' b, ais'				
+     
+     % bar 49
+     e gis e gis				dis b' dis, b'				cisis, ais' cisis, ais'			ais, gis' ais, gis'			|
+     <<
+       {
+         \voiceOne
+          fisis dis gis ais			<gis-3 b-5>8[	<fisis~-3 ais~-4>] 		
+                                                                                                     <fisis ais>  <dis gis> 		r4					|
+       }
+       \new Voice{
+         \voiceTwo s8 gis8~ 		
+       }
+       \new Voice{
+         \voiceFour r16 dis8.~ 	dis16 dis8 cis16~			cis8 	b					r4					    
+       }
+     >>  \bar ":|."
+  
+ 
+                                                                                                   
 }
+  
+   
+   
+   
+   
+   
+
 
 lower = \new Voice \relative c {
 
@@ -208,6 +244,34 @@ lower = \new Voice \relative c {
   gis dis' gis, dis' 		fisis, dis' fisis, dis' 		gis, dis' gis, dis'				dis, dis' dis, dis'			|
   gis,-3 ais b cis-3		dis b-1 ais gis			fisis gis ais e-1 				dis cis b-1 ais-4		|
   gis gis' gis, gis'		fis dis' fis, dis'			e, cis' e, cis'				dis, bis' dis, bis'			|
+  
+  %bar 45
+  cis, cis' cis, cis'			\clef treble b gis' b, gis'     ais, fisis' ais, fisis'			gis, gis' gis, gis'			|
+  fisis-3 gis ais e-2 		\clef bass dis cis b-1 ais 	gis8 b 					cis-3 dis				|
+  e e,					r8 <bis dis a'>			r8 <<
+                                                                                        {\voiceOne gis'}
+                                                                                        \new Voice {
+                                                                                          \voiceTwo cis,16 dis
+                                                                                        }
+                                                                                        >> 					<eis gis>8 <eis gis>		|
+  <<{\voiceThree f4} \new Voice {\voiceFour e8[ fis,] }>>
+                                          r8 <ais cis g'>			r8 <<
+                                                                                        {\voiceOne fis'}
+                                                                                        \new Voice {
+                                                                                          \voiceTwo b,16 cis
+                                                                                        }
+                                                                                        >>					<dis f>8 <dis f>		|
+                                                                                        
+  %bar 49
+   <<{\voiceThree e} \new Voice {\voiceFour dis8[ e,] }>>
+                                          r8 <gis b fis'>			r8 <<
+                                                                                        {\voiceThree eis'}
+                                                                                        \new Voice {
+                                                                                          \voiceFour ais,16 bis
+                                                                                        }
+                                                                                        >>					<cisis eis>8 <cis~ e>		|
+  <cis dis> b16 cis			dis8 dis,			gis8. b32 dis 				e4					
+  
 }
 
 
