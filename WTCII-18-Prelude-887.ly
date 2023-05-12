@@ -225,7 +225,9 @@ lower = \new Voice \relative c {
   gis gis, 				fis fis'				e e,						dis dis'				|
   
   %bar 29
-  cis8 cis,				r16 cis'' dis eis			fis8 fis,					r16 fis gis ais			|
+  cis8 cis,				r16 \change Staff = "up" \stemDown cis'' dis eis			
+                                                                                    fis8 \change Staff = "down" fis,					
+                                                                                                                                      r16 fis gis ais			|
   b8 b,				r16 b cis dis			e8 e,						r16 e fis gis			|
   a e' a, e'				gis, e' a, e'				a, e' a, e'					eis, d' eis, d'			|
   fis, cis' fis, cis'			e, cis' e, cis'			dis, fisis ais cis_1			b ais gis fisis_5			|
