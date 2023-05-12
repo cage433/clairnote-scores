@@ -37,7 +37,7 @@ clairnote-type = dn
 
 soprano = \relative d'' {
 	\repeat volta 2 { %begin repeated section
-		r16 d16-3 [ \appoggiatura es16 d32 cis d16 ] \once \override Slur #'direction = #UP \appoggiatura d16-1 bes'8-4 ~ [ bes32 a g f ] es16 [ d8 cis16 ~ ] | \noBreak % 1
+		r16 d16-3 [ \appoggiatura es16 d32 cis d16 ] \appoggiatura d16-1 bes'8-4 ~ [ bes32 a g f ] es16 [ d8 cis16 ~ ] | \noBreak % 1
 		cis16-2 [ c-1 \appoggiatura d16-3 c32 b c16 ]  \appoggiatura  c16-1 as'8-4 ~ [ as32 g f-1 es-4 ] des16 [ c8 b16-1 ~ ] | \noBreak % 2
 		b16-1 [ bes-2  \appoggiatura  c16-4 bes32 a bes16-2 ] fis' [ g8 cis,16 ~ ] cis [ d8 g,16 ] |% 3
 		g16-1 [ a32 bes a8 ] r4 r4 | \noBreak % 4
@@ -53,7 +53,7 @@ soprano = \relative d'' {
 		dis16-2 [ e-1 ~ e32 bes'-4 a-3 g-1 ] fis-3 [ e d8 d16 ] d' [ cis8-3 c16-2 ] | % 10
 		b16-1 [ bes-4 ~ bes32 a gis16 ~ ] gis [ a-3 ~ a32 d,-1 c-3 bes ] c-4 [ a-2 bes-4 g-3 f-2 e f d' ] | \noBreak% 11
 		f,32 \prallprall\finger "3/2" [ e f16 e8 ] r32 d32-1 [ cis-2 d-1 e f g-1 a ] bes [ a d16-5 ~ d32 cis-3 e16-5 ~ ] | % 12
-		e16-5 [ a,-1 \appoggiatura bes16-3 a32 gis-2 a16 ] \once \override Slur #'direction = #UP  \appoggiatura a16 a'8\finger "5--3" ~ [ a32 bes (a gis ) ] a-. [ d,-1 c-3 bes c-. c (bes a ) ] | % 13
+		e16-5 [ a,-1 \appoggiatura bes16-3 a32 gis-2 a16 ]  \appoggiatura a16 a'8\finger "5--3" ~ [ a32 bes (a gis ) ] a-. [ d,-1 c-3 bes c-. c (bes a ) ] | % 13
 		a16-1 [ bes \appoggiatura c16 bes32 a bes16 ] bes'8 ~ [ bes32 es,-2 d cis-2 ] d-1 [ c' b8 d,16 ] | % 14
 		cis16-3 [ bes8 a16 ] es'16-4 [ d ~ d32 cis e-1 g-2 ] bes16-4 [ a ~ a64 g f-1 e-4 d32-3 cis ] | % 15 
 	} %end of repeated section
@@ -74,7 +74,7 @@ soprano = \relative d'' {
 		bes16-2 [ ces-1  \appoggiatura des16-3 ces32-1 bes-2 ces16 ] ces-1 [ ces' ~ ces32 fes, es-2 d] es [ des' c8 es,16-1 ] | % 22
 		d16-3 [ ces8 bes16 ] fes'-4 [ es-3 ~ es32 d-1 f as ] ces16 [ bes ~ bes64 as64 ges64 f64 es32-3 d ] | \noBreak% 23
 		d8-2\( [ es8\) ] r4 r4 | \noBreak % 24
-		r16 g,16-1 [ \appoggiatura as16-3 g32 fis g16 ] \once \override Slur #'direction = #UP \appoggiatura g16 es'8-4 ~ [ es32 d c-1 bes-3 ] as16 [ g8 fis16-3 ] ~ | % 25
+		r16 g,16-1 [ \appoggiatura as16-3 g32 fis g16 ]  \appoggiatura g16 es'8-4 ~ [ es32 d c-1 bes-3 ] as16 [ g8 fis16-3 ] ~ | % 25
 		fis16-3 [ f \appoggiatura g16-4 f32 e f16 ] des'8 ~ [ des32 c-1 bes-4 as ] ges16 [ f8 e16-3 ~ ] | \noBreak% 26
 		e16 [ es  \appoggiatura     f16  -\tweak Y-offset 4 -4   es32 d es16 ] c'8 ~ [ c32 bes as g-1 ] fis16-2 [ es' ~ es32 d cis16 ] | \noBreak % 27
 		cis16-4 [ (d) es, (d) ] r32 e32 [ fis g-1 a bes c-1 d ] es [ d g16 ~ g32 fis-3 a16 ~ ] | % 28

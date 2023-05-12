@@ -26,48 +26,101 @@ global = {
 }
 \include "articulate.ly"
 
-clairnote-type = dn
-%\include "include/clairnote.ly"
 
+clairnote-type = dn
+% \include "include/clairnote.ly"
+
+
+lhMark = \markup { 
+  \path #0.1 #'((moveto -1 0)(rlineto 0 1.5)(rlineto 0.5 0))
+}
+rhMark = \markup { 
+  \path #0.1 #'((moveto -1 0)(rlineto 0 -1.5)(rlineto 0.5 0))
+}
                  
 upper = \new Voice \relative c' {
-  
-  gis'16 ais b cis 		dis b ais gis  		fisis gis ais eis              dis r16 r8 				    |
- r8 <gis b> \appoggiatura <gis b> <ais cis>4  		r8  	<gis b> \appoggiatura <gis b> <fisis ais>4			|
-   gis16_\markup {\italic "piano"} ais b cis 		dis b ais gis  		fisis gis ais eis              dis r16 r8 				    |
-  r8 <b' gis'> \appoggiatura <b gis'> <cis ais'>4  		r8  	<b gis'> \appoggiatura <b gis'> <cis ais'>4			|
+
+    <gis'-2>16   ais b-1 cis 	dis b-1 ais gis  				fisis gis ais e-1              		\once \set fingeringOrientations=#'(left) <dis \finger"⸢"> r16 r8 				 		|
+    r8 <gis b> 				\appoggiatura <gis b> <ais cis>4  		
+                                                                                                      r8 <gis b> 				\appoggiatura <gis b> <fisis ais>4	|
+  gis16_\markup {\italic "piano"} ais b cis 		
+                                                   dis b ais gis  				fisis gis ais e              		dis r16 r8 				  		|
+  r8 <b' gis'-4> 			\appoggiatura <b gis'> <cis ais'>4  		
+                                                                                                      r8 <b gis'-5> 				\appoggiatura <b gis'> <ais fisis'>4	|
  
   % bar 5
-  r8 <gis b>16_\markup {\italic "forte"} <fisis ais> <gis b>8 <b gis'> r8 <gis b>8 r8 << {ais16 gis} \\ eis8>> |
-  r8 <fis ais>16 <eis gis> <gis b>8 <ais fis'> r8 <ais fis>8 r8 << {gis16 fis} \\ dis8>> |
-  r8 <cisis gis'>16 <dis fis> <eis gis>8 <gis eis'> r8 <eis gis>8 r8 << {fis16 eis} \\ cisis!8>> |
-  <dis fis>4		r16 ais' gis fis		eis dis eis gis 		fisis eis fisis ais |  
+  r8 <gis b-4>16_\markup {\italic "forte"} <fisis ais> 
+                                                   <gis b>8 <b-1 gis'-5> 		r8 <gis b>8 				r8 << {ais16 gis} \\ eis8>> 		|
+  r8 <fis ais-4>16 <eis gis> 	<fis ais>8 <ais-2 fis'-5> 		r8 <ais fis>8 				r8 << {gis16 fis} \\ dis8>> 		|
+  r8 <cisis gis'-4>16 <dis fis> 	<eis-1 gis-4>8 <gis eis'>		 r8 <eis gis>8 				r8 << {fis16-4 eis} \\ cisis!8>> 		|
+  <dis-2 fis-4>4			r16 ais'-4 gis fis			eis-1 dis-2 eis-1 gis 				fisis eis fisis ais |  
   
    % bar 9
-   ais8 gis 				r16 fis e dis 			cis bis cis e				dis cis dis fis			|
-   fis8 e				r16 dis cis b			ais gis ais cis 				bis ais bis dis			|
-   gis, fisis gis b			ais gis ais cis			fisis, e' dis cis				ais' cis, ais' cis,			|
-   dis a' gis fis			dis' fis, dis' fis, 			eis d cis b					gis' b, gis' b,			|
+   ais8-4 gis 				r16 fis-2 e dis-3 			cis bis cis e				dis cis dis fis-5			|
+   fis8-5 e					r16 dis-3 cis b-1			ais-3 gis ais-4 cis 			bis ais bis dis-5			|
+   gis,-2 fisis gis b			ais gis ais cis				fisis, e'-4 dis cis			ais' cis, ais' cis,			|
+   bis-1 a'-4 gis fis			dis' fis, dis' fis, 				eis d-3 cis b				gis' b, gis' b,			|
    
    % bar 13
-   ais g' fis e			cis' e, cis' e,			dis fis gis ais				b fis eis dis			|
-   cisis b'ais gis			eis' gis, eis' gis, 			fis ais dis eis				fis dis bis dis			|
-   gisis, fis' eis dis		bis' dis, bis' dis,			cisis dis eis ais				ais, r16 r8				|
-   r16 cisis dis eis		fis32 eis dis16 <gis b>8	<gis b> <cisis,! ais'>			r4					|					
+   ais-2 g'-5 fis-3 e-1		cis' e, cis' e,-2				dis fis gis ais				b fis-2 eis-1 dis-2		|
+   cisis b'ais-3 gis			eis' gis, eis' gis, 				fis ais dis eis				fis dis bis dis-3			|
+   gisis, fis'-4 eis dis			bis' dis, bis' dis,				cisis dis eis ais				ais, r16 r8				|
+   r16 cisis dis eis			fis32 eis dis16 <gis b>8		<gis b> <cisis,! ais'>			r4					|	
+   
+   %bar17
+   r8 <dis fis>				\appoggiatura <dis fis> <eis gis>4
+                                                                                                     r8 <dis fis>				\appoggiatura <dis fis> <cis eis>4	|
+   r8 dis 					dis16\trill cisis dis8			r8 dis					cis16 b cis ais'			|
+   
+   <<
+     {\voiceOne
+       b,8 r8					cis r8					dis r8 					ais r8   				|
+        r8 eis16 dis			eis8	gis					cisis, eis					ais,4~				|
+        
+        %bar 21
+        ais8 ais16 gis			ais8 fis'8					r8 dis					r8 bis				|
+        r8 gis16 fis			gis8 eis'8					r8 cis					r8 ais				|
+        r8 gisis				ais dis					r8 dis 					cisis b'				|
+        ais4 					r16 ais eis gis				gis8 fisis					r4					|
+     }
+     \new Voice \relative c' {
+       \voiceTwo 
+        r8 dis				dis16 cisis dis8				r8 e32 dis cisis16				dis8 dis'			|
+        gis,2~										gis8. fis16					eis dis eis cisis			|
+        
+        %bar 21
+        dis8 fis16 eis			fis8 ais					r8 fis						r8 eis16 dis			|
+        r8 eis16 dis			eis8	gis					r8 eis					r8 dis16 cisis			|
+        r8 fis16 eis				fis dis  bis'8				r8 bis16 ais 				b gis gis'8~			|
+        gis8 fis32 eis dis16		cisis4~					cisis8 dis					r4					|
+
+
+      %bar 25
+      dis16 eis fisis gis			ais e-1 dis-3 cis			bis cis dis a-1				gis-3 fis e dis			|
+      e-1 cis' e, cis'			eis, d' eis, d'				cis a-1 gis-3 fis				eis d'cis b				|
+      ais b-1 cis dis 			e b a-4 gis				fisis gis ais e				dis-3 cis b ais-2		|
+      b-1 gis'-4 b, gis'			bis,-1 a'-5 bis, a'			gis e-1 dis-3 cis			b a'-5 gis fis			|
+     }
+   >> \oneVoice
+   
+   
+   
+   
    
 }
 
 lower = \new Voice \relative c {
-  <gis' b dis>4		   	r4 					<gis ais cis>				 r16 cis b ais	 		|
-  gis dis' gis, dis'           	fisis, dis' fisis, dis'           	gis, dis' gis, dis'      	 		dis, dis' dis, dis'		  	|
+
+  <gis' b dis>4			r4 					<gis ais cis>				r16 cis b ais	 		|
+  gis-5 dis' gis, dis'           	fisis,-5 dis' fisis, dis'           gis,-4 dis' gis, dis'      	 	dis,-5 dis' dis, dis'		  	|
   <gis, b dis>4		   	r4 					<gis ais cis> 				r16 cis b ais	 		|
   gis dis' gis, dis'           	fisis, dis' fisis, dis'           	gis, dis' gis, dis'      	 		dis, dis' dis, dis'		  	|
   
   % bar 5
   gis, dis' gis, dis'         	fis, dis' fis, dis'           	eis, cis' eis, cis'      	 		cis, cis' cis, cis'		  	|
-  fis, cis' fis, cis'           	eis, cis' eis, cis'           	dis, b' dis, b'      	 		b, b' b, b'		  		|
+  fis, cis' fis, cis'           	e, cis' e, cis'           		dis, b' dis, b'      	 		b, b' b, b'		  		|
   eis, b' eis, b'      	 	dis, b' dis, b'			cisis, ais' cisis, ais'			ais, ais' ais, ais'			|
-  dis, fis gis ais			b8 dis,8				ais fisis'					fis a, 				|
+  dis, fis gis ais			b8 dis,8				cisis b'					ais cis, 				|
   
   % bar 9
   bis16 dis eis fisis		gis8 b,				ais fisis'!					fis a,					|
@@ -79,15 +132,28 @@ lower = \new Voice \relative c {
   fis gis 				ais fis				b ais						gis fis				|
   eis gis				cisis, ais				dis cis 					bis ais				|
   bis dis				gisis, eis				ais' r8					\clef treble r16 gis' fis eis  |
-  dis eis fis gis			ais fis eis dis			cisis dis eis gis,				\clef bass ais gis fis eis     |
+  dis eis fis gis			ais fis eis dis			cisis dis eis b				\clef bass ais gis fis eis     |
   
+  %bar 17
+  dis ais' dis, ais'			cisis, ais' cisis, ais'		dis, ais' dis, ais'				ais, ais' ais, ais'			|
+  b, fis' b, fis'			ais, fis' ais, fis'			b, fis' b, fis'				fisis, e' fisis, e'			|
+  gis, dis' gis, dis'		fisis, dis' fisis, dis'		gis, dis' gis, dis'				fis, dis' fis, dis'			|
+  eis, dis' cisis bis		cisis gis' eis gis			ais, ais' bis, ais'				cisis, ais' ais, gis'		|
+  
+  %bar 21
+  dis fis dis fis			cis ais' cis, ais'			bis, gis' bis, gis'				gis, gis' gis, fis'			|
+  cis eis cis eis			b gis' b, gis'			ais, fis' ais, fis' 				fis, fis' fis, eis'			|
+  bis dis bis dis			ais fis' ais, fis' 			gisis, eis' gisis, eis'			eis, eis' eis, dis'			|
+  cisis ais dis fis			ais8 ais, 				dis,8. fisis32 ais				dis4					|
+  
+  %bar 25
+  r8 dis16-5 eis			fisis8 ais				dis cis 					bis gis-5				| 
+  cis cis, 				b b'					a a,						gis gis'				|
+  fis fis,				cis' e					ais,-4 cis-2				fisis,-5 dis'-2			|
+  gis gis, 				fis fis'				e e,						dis dis'				|
 }
 
-themeDynamics = {
-    s2 \f s2 |
-    s1 |
-    s2. \< s4 \! |
-}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % MIDI
 \score {
@@ -97,7 +163,6 @@ themeDynamics = {
     << \global \clef treble
        \upper 
      >>
-      \new Dynamics {s1\<| }
     \new Staff="down" 
     << \global \clef treble
        \lower
@@ -112,6 +177,7 @@ themeDynamics = {
 % Printed score
 \score {
   \new PianoStaff << 
+    	\set PianoStaff.midiInstrument = "harpsichord"
     \new Staff="up"
     << \global \clef treble
        \upper 
