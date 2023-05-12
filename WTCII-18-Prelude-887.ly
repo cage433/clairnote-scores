@@ -17,7 +17,7 @@
 global = {
   \key gis \minor
   \time 4/4
-  \accidentalStyle default
+  \accidentalStyle modern-cautionary
 }
 
 \paper {
@@ -115,6 +115,12 @@ upper = \new Voice \relative c' {
                                                   eis' gis, eis' gis,				fisis e' dis cis				ais' cis, ais' cis,			|
       bis-1 a-3 gis fis			dis' fis,-2 dis' fis, 			eis d' cis b-1				gis' b, gis' b,-2			|
       ais cis dis eis			fis8 ais,-2					gisis fis'-5					e-5 gis,				|
+      
+      %bar 37
+      fisis16-1 a bis cisis		dis8 fis,-2					eis d'						cis e,-1				|	
+      dis16-2 fisis-1 gis-3 ais	b8 dis,					cisis-1 b'					ais cis,				|
+      bis a'					gis b,-1					ais-2 gis'-5				fisis-5 a,-1			|
+      gis-2 fis' 				eis <gis, e'>	 			<gis e'> <fisis dis'>			r4					|
      
      }
    >> \oneVoice
@@ -179,6 +185,12 @@ lower = \new Voice \relative c {
   ais8 bis				cisis ais-5				dis eis 					fisis dis-5				|
   gis ais				bis gis-5				cis dis					eis cis-4				|
   fis4-2				r16 eis-1 dis cis		bis ais bis dis				cisis bis cisis eis			|
+  
+  %bar 37
+  eis8 dis				cis16-2 b-1 ais gis		gis fisis gis b				ais-3 gis ais cis			|
+  cis8 b				r16 ais-1 gis fis			eis dis eis gis				fisis eis fisis ais			|
+  dis,-3 cisis dis fis		e dis e gis				cisis,-4 bis cisis eis			dis cisis dis fis			|
+  bis,-4 ais bis dis		cis bis cis e			ais, b cis b					cis fisis ais cis,			|
 }
 
 
