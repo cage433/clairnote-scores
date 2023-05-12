@@ -1,12 +1,13 @@
 %    This file "clairnote.ly" is a LilyPond include file for producing
 %    sheet music in Clairnote music notation (http://clairnote.org).
-%    Version: 20181125
+%    Version: 20230104
 %
-%    Copyright © 2013, 2014, 2015, 2016, 2017, 2018 Paul Morris,
+%    Copyright © 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021,
+%    2022, 2023 Paul Morris,
 %    except for functions copied and modified from LilyPond source code,
 %    the LilyPond Snippet Repository, and openLilyLib, as noted in
 %    comments below.
-%    Contact information: http://clairnote.org/about/
+%    Contact information: http://clairnote.org/contact/
 %
 %    This file is free software: you can redistribute it and/or modify
 %    it under the terms of the GNU General Public License as published by
@@ -32,10 +33,10 @@
 
 #(define (positive-integer? n) (and (positive? n) (integer? n)))
 
-#(define (map-pairs proc . pairs)
+#(define (map-pair proc pair)
    (cons
-    (reduce proc '() (map car pairs))
-    (reduce proc '() (map cdr pairs))))
+    (proc (car pair))
+    (proc (cdr pair))))
 
 #(define (cn-notehead-pitch grob)
    ;; Takes a note head grob and returns its pitch.
@@ -97,7 +98,8 @@
 %--- NOTE HEADS AND STEM ATTACHMENT ----------------
 
 #(define cn-whole-note-black-path
-   '(moveto 0 0
+   '(
+      moveto 0 0
       curveto 0 0.16054432 0.12694192 0.28001904 0.272552 0.35842432
       curveto 0.47416576 0.4666984 0.70564816 0.50776784 0.93339712 0.50776784
       curveto 1.16114576 0.50776784 1.39636192 0.4666984 1.59797568 0.35842432
@@ -112,7 +114,8 @@
    ;; white-path is the black path with the center hole added
    (append
     cn-whole-note-black-path
-    '(moveto 1.06033904 -0.36566768
+    '(
+       moveto 1.06033904 -0.36566768
        curveto 1.24701856 -0.36566768 1.32542384 -0.2688184 1.32542384 -0.09707328
        curveto 1.32542384 0.19788 1.10140848 0.36566752 0.80645504 0.36566752
        curveto 0.61977552 0.36566752 0.545104 0.26881824 0.545104 0.09707312
@@ -130,7 +133,8 @@
       mag mag)))
 
 #(define cn-note-black-path
-   '(moveto 1.0161518991984164 0.5004939160736768
+   '(
+      moveto 1.0161518991984164 0.5004939160736768
       curveto 1.1900858991984165 0.45804726744838686 1.3000056991984164 0.36006297281891986 1.3267185991984165 0.22365338254444356
       curveto 1.3472530991984164 0.11878494731492373 1.3090816991984164 -0.03242382812749062 1.2346937991984164 -0.14100554722801906
       curveto 1.1037044991984164 -0.3321698541497182 0.8786728091984164 -0.46440803197455877 0.6176073691984164 -0.5036333230878486
@@ -141,7 +145,8 @@
       closepath))
 
 #(define cn-note-white-path
-   '(moveto 1.026468864255086 0.4998680875655276
+   '(
+      moveto 1.026468864255086 0.4998680875655276
       curveto 1.215249864255086 0.4618436649454002 1.337174464255086 0.35147108531050375 1.354920364255086 0.20252749405141746
       curveto 1.369178964255086 0.08282868839604651 1.312372764255086 -0.07672001395465605 1.209350364255086 -0.20633856802981299
       curveto 1.077365164255086 -0.37239062345611024 0.889153024255086 -0.47211463127579484 0.6458905642550861 -0.5048878796193299
@@ -192,9 +197,9 @@
 #(define (cn-funksol-note-head-stencil grob white-note)
    ;; Returns 'funksol' style note head stencils.
    (ly:font-get-glyph (ly:grob-default-font grob)
-     (if white-note
-         "noteheads.s1solFunk"
-         "noteheads.s2solFunk")))
+                      (if white-note
+                          "noteheads.s1solFunk"
+                          "noteheads.s2solFunk")))
 
 #(define (cn-stylish-note? grob)
    ;; Does a note head grob have one of these style properties.
@@ -264,14 +269,17 @@
 
 %--- ACCIDENTAL STYLE ----------------
 
-%% Procedures copied from scm/music-functions.scm, renamed with cn- prefix.
+%% A custom accidental style that determines when and where
+%% accidental signs are rendered or not (i.e. grobs created).
 
 #(define (cn-recent-enough? bar-number alteration-def laziness)
+   ;; Procedure copied from scm/music-functions.scm, renamed with cn- prefix.
    (or (number? alteration-def)
        (equal? laziness #t)
        (<= bar-number (+ (cadr alteration-def) laziness))))
 
 #(define (cn-accidental-invalid? alteration-def)
+   ;; Procedure copied from scm/music-functions.scm, renamed with cn- prefix.
    ;; Checks an alteration entry for being invalid.
 
    ;; Non-key alterations are invalidated when tying into the next bar or
@@ -285,104 +293,79 @@
      (and (symbol? def) def)))
 
 #(define (cn-extract-alteration alteration-def)
+   ;; Procedure copied from scm/music-functions.scm, renamed with cn- prefix.
    (cond ((number? alteration-def)
           alteration-def)
-     ((pair? alteration-def)
-      (car alteration-def))
-     (else 0)))
+         ((pair? alteration-def)
+          (car alteration-def))
+         (else 0)))
 
-%% End of unmodified copied procedures.
-
-#(define (cn-convert-to-semi-alts cn-alts local-alts)
+#(define (cn-to-semitone-alterations cn-alterations accidental-alterations)
    ;; Converts accidental alteration data to allow lookup by semitone.
-   ;; From: ((octave . notename) . (alter barnum . measure-position))
-   ;; To: (semitone alter barnum . measure-position)
+   ;; From: ((octave . notename) . (alter barnum . end-moment))
+   ;; To: (semitone alter barnum . end-moment)
 
    ;; notename is 0-6 diatonic note number.
 
    ;; With clef changes or notes tied across a bar line we get
    ;; e.g. ((0 . 6) clef 1 . #<Mom 7/8>) with 'clef or 'tied as the
    ;; alter value to invalidate the entry. Then we have to look up
-   ;; the alter value in cn-alts, the cnAlterations context property.
+   ;; the alter value in cn-alterations, the cnAlterations context property.
    ;; This is the sole purpose of cnAlterations. It would be much
    ;; simpler if LilyPond did not destructively overload the alter
    ;; value like this.
-   ;; (format #t "cn-alts: ~a \n" cn-alts)
+   ;; (format #t "cn-alterations: ~a \n" cn-alterations)
    (map (lambda (entry)
           (let*
            ((octave (caar entry))
             (notename (cdar entry))
             (alteration-def (cdr entry))
             (alter (if (cn-accidental-invalid? alteration-def)
+                       ;; The following works because cn-extract-alteration
+                       ;; handles entries like: ((octave . notename) . alter)
+                       ;; and handles failed lookups (#f) by defaulting to 0.
                        (cn-extract-alteration
-                        (assoc-ref cn-alts (cons octave notename)))
+                        (assoc-ref cn-alterations (cons octave notename)))
                        (cn-extract-alteration alteration-def)))
             (pitch (ly:make-pitch octave notename alter))
             (semitone (ly:pitch-semitones pitch)))
            (cons semitone alteration-def)))
-     local-alts))
+        accidental-alterations))
 
-#(define (cn-merge-semi-alts cn-semi-alts local-semi-alts)
-   ;; Update cn-semi-alts by merging local-semi-alts into it.
-   ;; Their entries are: (semitone alter barnum . measure-position)
+#(define (cn-merge-semi-alts cn-semi-alterations semitone-accidental-alterations)
+   ;; Update cn-semi-alterations by merging semitone-accidental-alterations into it.
+   ;; Their entries are: (semitone alter barnum . end-moment)
+   (define (get-barnum entry) (caddr entry))
+   (define (get-end-moment entry) (cdddr entry))
+
    (define (merge-entry! local-entry)
      (let* ((semi (car local-entry))
-            (cn-entry (assv semi cn-semi-alts)))
+            (cn-entry (assv semi cn-semi-alterations)))
 
        ;; (format #t "local-entry: ~a \n" local-entry)
        ;; (format #t "cn-entry: ~a \n\n" cn-entry)
 
        ;; We merge when there is no entry for a given semitone,
        ;; or when there is one with a previous barnum,
-       ;; or when there is one with the same barnum and a
-       ;; previous measure-position.
+       ;; or when there is one with the same barnum
+       ;;    and a previous end-moment.
        (if (or (not cn-entry)
-               (< (caddr cn-entry) (caddr local-entry))
-               (and (= (caddr cn-entry) (caddr local-entry))
-                    (ly:moment<? (cdddr cn-entry) (cdddr local-entry))))
-           (set! cn-semi-alts
-                 (assv-set! cn-semi-alts semi (cdr local-entry))))))
+               (< (get-barnum cn-entry)
+                  (get-barnum local-entry))
+               (and (= (get-barnum cn-entry)
+                       (get-barnum local-entry))
+                    (ly:moment<? (get-end-moment cn-entry)
+                                 (get-end-moment local-entry))))
+           (set! cn-semi-alterations
+                 (assv-set! cn-semi-alterations semi (cdr local-entry))))))
 
-   ;; (format #t "cn-semi-alts: ~a \n" cn-semi-alts)
-   ;; (format #t "local-semi-alts: ~a \n\n" local-semi-alts)
+   ;; (format #t "cn-semi-alterations: ~a \n" cn-semi-alterations)
+   ;; (format #t "semitone-accidental-alterations: ~a \n\n" semitone-accidental-alterations)
 
-   (for-each merge-entry! local-semi-alts)
-   cn-semi-alts)
+   (for-each merge-entry! semitone-accidental-alterations)
+   cn-semi-alterations)
 
-#(define (cn-refresh-semi-alts! context)
-   ;; Converts localAlterations to a semitone-based version and
-   ;; returns the result after storing it in the cnSemiAlterations
-   ;; context property.
-   (let*
-    ;; localAlterations includes key signature entries like
-    ;; (notename . alter) and maybe ((octave . notename) . alter)
-    ;; so we filter these out, leaving only accidental entries:
-    ;; ((octave . notename) . (alter barnum . measure-position))
-    ((local-alts-raw (ly:context-property context 'localAlterations '()))
-     (accidental-alt? (lambda (entry) (pair? (cdr entry))))
-     (local-alts (filter accidental-alt? local-alts-raw)))
-
-    (if (null? local-alts)
-        (begin
-         (ly:context-set-property! context 'cnSemiAlterations '())
-         (ly:context-set-property! context 'cnAlterations '())
-         '())
-        (let*
-         ((cn-alts (ly:context-property context 'cnAlterations '()))
-          ;; Convert local-alts for lookup by semitone:
-          ;; (semitone alter barnum . measure-position))
-          (local-semi-alts (cn-convert-to-semi-alts cn-alts local-alts))
-
-          (cn-semi-alts (ly:context-property context 'cnSemiAlterations '()))
-          (new-semi-alts (cn-merge-semi-alts cn-semi-alts local-semi-alts)))
-
-         ;; (format #t "local-alts: ~a \n" local-alts)
-         ;; (format #t "semi-alts: ~a \n" new-semi-alts)
-
-         (ly:context-set-property! context 'cnSemiAlterations new-semi-alts)
-         new-semi-alts))))
-
-#(define (cn-check-pitch-against-signature context pitch barnum measurepos laziness)
+#(define (cn-check-pitch-against-signature context pitch barnum laziness)
    ;; A modified version of this function from scm/music-functions.scm.
    ;; Arguments octaveness and all-naturals have been removed. Currently
    ;; laziness is always 0. We check active accidentals by semitone,
@@ -396,39 +379,73 @@
    ;; accidentals in the same measure; if @var{laziness} is three, we
    ;; cancel accidentals up to three measures after they first appear.
    (let*
-    ((notename (ly:pitch-notename pitch))
+    ;; localAlterations includes key signature entries and accidental entries.
+    ;; Filter out the key signature entries to leave just accidental entries.
+    ;; Key signature entries come in two forms:
+    ;;     (notename . alter)
+    ;;     ((octave . notename) . alter)
+    ;; Accidental entries have the form:
+    ;;     ((octave . notename) . (alter barnum . end-moment))
+    ((local-alterations (ly:context-property context 'localAlterations '()))
+     (accidental? (lambda (entry) (pair? (cdr entry))))
+     (accidental-alterations (filter accidental? local-alterations))
+
+     ;; Convert the accidental alterations to a semitone-based version and
+     ;; store it in the cnSemiAlterations context property.
+     (cn-semi-alterations
+      (if (null? accidental-alterations)
+          (begin
+           (ly:context-set-property! context 'cnSemiAlterations '())
+           (ly:context-set-property! context 'cnAlterations '())
+           '())
+          (let*
+           ((semitone-accidental-alterations
+             (cn-to-semitone-alterations
+              (ly:context-property context 'cnAlterations '())
+              accidental-alterations))
+
+            (new-semi-alterations
+             (cn-merge-semi-alts
+              (ly:context-property context 'cnSemiAlterations '())
+              semitone-accidental-alterations)))
+
+           ;; (format #t "accidental-alterations: ~a \n" accidental-alterations)
+           ;; (format #t "new-semi-alterations: ~a \n" new-semi-alterations)
+
+           (ly:context-set-property! context 'cnSemiAlterations new-semi-alterations)
+
+           new-semi-alterations)))
+
+     (notename (ly:pitch-notename pitch))
      (octave (ly:pitch-octave pitch))
      (alter (ly:pitch-alteration pitch))
      (semi (ly:pitch-semitones pitch))
 
-     (cn-semi-alts (cn-refresh-semi-alts! context))
-
-     ;; from-cn-alts will be #f or (alter barnum . measure-position)
-     (from-cn-semi-alts (assoc-get semi cn-semi-alts))
-
-     (key-alts (ly:context-property context 'keyAlterations '()))
-     ;; from-key-alts will be #f or an alter number (e.g. 1/2, -1/2, 0)
-     (from-key-alts
-      (or (assoc-get notename key-alts)
-          ;; If no notename match is found in keyAlterations,
-          ;; we may have octave-specific entries like
-          ;; ((octave . notename) alteration) instead of
-          ;; (notename . alteration), so we try those as well.
-          (assoc-get (cons octave notename) key-alts)))
+     ;; will be #f or (alter barnum . end-moment)
+     (from-cn-semi-alterations (assoc-get semi cn-semi-alterations))
 
      ;; Get previous alteration for comparison with pitch.
      (previous-alteration
-      (or (and from-cn-semi-alts
-               (cn-recent-enough? barnum from-cn-semi-alts laziness)
-               from-cn-semi-alts)
-          from-key-alts)))
+      (if (and from-cn-semi-alterations
+               (cn-recent-enough? barnum from-cn-semi-alterations laziness))
+          from-cn-semi-alterations
+          (let*
+           ((key-alterations (ly:context-property context 'keyAlterations '())))
+           ;; keyAlterations can contain regular and octave-specific entries.
+           ;;   (notename . alter)
+           ;;   ((octave . notename) . alter)
+           ;; The value will be #f or an alter number (e.g. 1/2, -1/2, 0).
+           (or (assoc-get notename key-alterations)
+               (assoc-get (cons octave notename) key-alterations))))))
 
-    ;; (format #t "current: ~a ~a ~a ~a \n\n" semi alter barnum measurepos)
+    ;; (format #t "semi: ~a alter: ~a barnum: ~a \n\n" semi alter barnum)
 
-    ;; Add the current note to cnAlterations.
+    ;; Write the current note's alter value into cnAlterations, overwriting any
+    ;; existing entries for that (octave . notename) key.
     (ly:context-set-property! context 'cnAlterations
-      (assoc-set! (ly:context-property context 'cnAlterations)
-        `(,octave . ,notename) `(,alter ,barnum . ,measurepos)))
+                              (assoc-set! (ly:context-property context 'cnAlterations)
+                                          (cons octave notename)
+                                          alter))
 
     ;; Return a pair of booleans.
     ;; The first is always false since we never print an extra natural sign.
@@ -444,6 +461,13 @@
 
 #(define (cn-make-accidental-rule laziness)
    ;; Slightly modified, octaveness argument has been removed.
+   ;; Starting with Lilypond 2.23.4 the returned function took 3 arguments
+   ;; (context, pitch, and barnum), but in earlier versions it took 4
+   ;; arguments. The 4th argument was measure position, which is not actually
+   ;; necessary for the Clairnote accidental style code. So return a
+   ;; function that takes an optional 4th argument and ignores it, for
+   ;; backwards compatibility. See commit 2151499a:
+   ;; https://gitlab.com/lilypond/lilypond/-/commit/2151499a7ca37a8138cea630be96da5daea88159
 
    ;; Create an accidental rule that makes its decision based on a laziness value.
    ;; @var{laziness} states over how many bars an accidental should be remembered.
@@ -452,13 +476,44 @@
    ;; accidental lasts over that many bar lines.  @w{@code{-1}} is `forget
    ;; immediately', that is, only look at key signature.  @code{#t} is `forever'.
 
-   (lambda (context pitch barnum measurepos)
-     (cn-check-pitch-against-signature context pitch barnum measurepos laziness)))
+   (lambda (context pitch barnum . rest)
+     (cn-check-pitch-against-signature context pitch barnum laziness)))
 
 accidental-styles.clairnote-default =
 #`(#t (Staff ,(cn-make-accidental-rule 0)) ())
 
 accidental-styles.none = #'(#t () ())
+
+
+%--- ACCIDENTAL ENGRAVER ----------------
+
+#(define (Cn_accidental_engraver context)
+   ;; This accidental engraver is needed for directional natural signs.
+   ;; For natural accidental signs, if they are "cancelling" a sharp
+   ;; or flat from the current key signature, set a custom grob property
+   ;; on the accidental sign grob that indicates the direction of the
+   ;; natural sign, i.e. whether it is "cancelling" a sharp or a flat
+   ;; from the key signature. Then the grob stencil function takes it
+   ;; from there.
+
+   ;; The context has to be accessed like this (and not with
+   ;; ly:translator-context) for accidentals to be tracked per staff,
+   ;; (e.g. when we were tracking accidentals per staff).
+   (make-engraver
+    (acknowledgers
+     ((accidental-interface engraver grob source-engraver)
+      (let* ((pitch (cn-notehead-pitch (ly:grob-parent grob Y)))
+             (note (ly:pitch-notename pitch))
+             (key-alterations (ly:context-property context 'keyAlterations '()))
+             (key-sig-alt (assoc-ref key-alterations note))
+             (accidental-alt (accidental-interface::calc-alteration grob))
+             (is-natural (= accidental-alt 0)))
+        (if (and is-natural key-sig-alt)
+            (ly:grob-set-property! grob 'cn-natural-sign-direction
+                                   (cond
+                                    ((> key-sig-alt 0) "natural-down")
+                                    ((< key-sig-alt 0) "natural-up")
+                                    (else null)))))))))
 
 
 %--- ACCIDENTAL SIGNS ----------------
@@ -480,7 +535,7 @@ accidental-styles.none = #'(#t () ())
      (acc-sign (lambda (dot-position)
                  ;; Return a sharp or flat sign stencil.
                  (ly:stencil-add vertical-line
-                   (ly:stencil-translate circle `(0 . ,dot-position)))))
+                                 (ly:stencil-translate circle `(0 . ,dot-position)))))
 
      (double-acc-sign (lambda (stil)
                         ;; Return a double sharp or double flat sign stencil.
@@ -491,12 +546,21 @@ accidental-styles.none = #'(#t () ())
      (sharp (acc-sign 0.5))
      (flat (acc-sign -0.5))
      (natural (ly:stencil-add diagonal-line
-                (ly:stencil-translate short-vertical-line '(0.2 . -0.3))
-                (ly:stencil-translate short-vertical-line '(-0.2 . 0.3)))))
+                              (ly:stencil-translate short-vertical-line '(0.2 . -0.3))
+                              (ly:stencil-translate short-vertical-line '(-0.2 . 0.3))))
+
+     (natural-down (ly:stencil-add natural
+                                   (ly:stencil-translate circle '(0.2 . -0.6))))
+
+     (natural-up (ly:stencil-add natural
+                                 (ly:stencil-translate circle '(-0.2 . 0.6)))))
 
     `((1/2 . ,sharp)
       (-1/2 . ,flat)
       (0 . ,natural)
+      ;; Use natural-down and natural-up for experimental directional natural signs.
+      ("natural-down" . ,natural)
+      ("natural-up" . ,natural)
       (1 . ,(double-acc-sign sharp))
       (-1 . ,(double-acc-sign flat)))))
 
@@ -504,9 +568,12 @@ accidental-styles.none = #'(#t () ())
    ;; Returns an accidental sign stencil.
    (let* ((mag (cn-magnification grob))
           (alt (accidental-interface::calc-alteration grob))
-          (stil (assoc-ref cn-acc-sign-stils alt)))
-     (if stil
-         (ly:stencil-scale stil mag mag)
+          (direction (and (= 0 alt)
+                          (ly:grob-property grob 'cn-natural-sign-direction)))
+          (stencil-key (if (string? direction) direction alt))
+          (stencil (assoc-ref cn-acc-sign-stils stencil-key)))
+     (if stencil
+         (ly:stencil-scale stencil mag mag)
          ;; else fall back to traditional accidental sign
          (ly:stencil-scale (ly:accidental-interface::print grob) 0.63 0.63))))
 
@@ -572,29 +639,31 @@ accidental-styles.none = #'(#t () ())
 
      (stack-list (map (lambda (xy bw)
                         (ly:stencil-translate (if bw black-dot white-dot) xy))
-                   posns pattern))
+                      posns pattern))
 
      ;; add alterations - convert alt-list to a relative basis, tonic = 0, etc.
      (relative-alt-list (map (lambda (n)
-                               (cons (modulo (- (car n) tonic-num) 7) (cdr n))) alt-list))
+                               (cons (modulo (- (car n) tonic-num) 7)
+                                     (cdr n)))
+                             alt-list))
      (full-alt-list (map (lambda (n)
                            (assoc-ref relative-alt-list n)) '(0 1 2 3 4 5 6)))
 
      (sharp-line (make-path-stencil '(moveto 0 -0.2 lineto -0.7 -0.9) 0.22 1 1 #f))
      (flat-line (make-path-stencil '(moveto 0 0.2 lineto -0.7 0.9) 0.22 1 1 #f))
 
-     (alt-stack-list (map (lambda (stil alt xy)
-                            (cond
-                             ((eqv? -1/2 alt)
-                              (ly:stencil-combine-at-edge stil X -1
-                                (ly:stencil-translate flat-line xy)
-                                -0.2))
-                             ((eqv? 1/2 alt)
-                              (ly:stencil-combine-at-edge stil X -1
-                                (ly:stencil-translate sharp-line xy)
-                                -0.2))
-                             (else stil)))
-                       stack-list full-alt-list posns))
+     (alt-stack-list
+      (map (lambda (stil alt xy)
+             (cond
+              ((eqv? -1/2 alt)
+               (ly:stencil-combine-at-edge
+                stil X -1 (ly:stencil-translate flat-line xy) -0.2))
+              ((eqv? 1/2 alt)
+               (ly:stencil-combine-at-edge
+                stil X -1 (ly:stencil-translate sharp-line xy) -0.2))
+              (else stil)))
+           stack-list full-alt-list posns))
+
      (combined-stack (fold ly:stencil-add empty-stencil alt-stack-list))
      ;; horizontal position adjustment
      (extent (ly:stencil-extent combined-stack 0))
@@ -657,7 +726,7 @@ accidental-styles.none = #'(#t () ())
     (acknowledgers
      ((key-signature-interface engraver grob source-engraver)
       (ly:grob-set-property! grob 'cn-tonic
-        (ly:context-property context 'tonic))))))
+                             (ly:context-property context 'tonic))))))
 
 
 %--- CLEFS AND OTTAVA (8VA 8VB 15MA 15MB) ----------------
@@ -733,11 +802,11 @@ accidental-styles.none = #'(#t () ())
    (if (null? glyph)
        '()
        (+ clef-adjust
-         (cond
-          ((string=? "clefs.G" glyph) -5)
-          ((string=? "clefs.F" glyph) 5)
-          ;; clefs.C and clefs.percussion
-          (else 0)))))
+          (cond
+           ((string=? "clefs.G" glyph) -5)
+           ((string=? "clefs.F" glyph) 5)
+           ;; clefs.C and clefs.percussion
+           (else 0)))))
 
 #(define (cn-convert-middle-c-clef-position glyph clef-adjust trans)
    ;; Takes standard middleCClefPosition or middleCCuePosition values
@@ -751,12 +820,12 @@ accidental-styles.none = #'(#t () ())
    (if (null? glyph)
        '()
        (+ clef-adjust
-         (- trans)
-         (cond
-          ((string=? "clefs.G" glyph) -12)
-          ((string=? "clefs.F" glyph) 12)
-          ;; clefs.C and clefs.percussion
-          (else 0)))))
+          (- trans)
+          (cond
+           ((string=? "clefs.G" glyph) -12)
+           ((string=? "clefs.F" glyph) 12)
+           ;; clefs.C and clefs.percussion
+           (else 0)))))
 
 #(define (cn-convert-middle-c-offset offset)
    ;; Takes standard middleCOffset values for Ottava/8va and converts them.
@@ -797,26 +866,26 @@ accidental-styles.none = #'(#t () ())
      ;; But clef-adjust is a number.
      (set-glyph! (lambda (glyph pos)
                    (set-prop! glyph
-                     (cn-convert-clef-glyph
-                      (ly:context-property context glyph)
-                      (ly:context-property context pos)))))
+                              (cn-convert-clef-glyph
+                               (ly:context-property context glyph)
+                               (ly:context-property context pos)))))
 
      (set-transposition! (lambda (trans)
                            (set-prop! trans
-                             (cn-convert-clef-transposition
-                              (ly:context-property context trans)))))
+                                      (cn-convert-clef-transposition
+                                       (ly:context-property context trans)))))
 
      (set-position! (lambda (pos glyph clef-adjust)
                       (set-prop! pos
-                        (cn-convert-clef-position
-                         (hash-ref props glyph '()) clef-adjust))))
+                                 (cn-convert-clef-position
+                                  (hash-ref props glyph '()) clef-adjust))))
 
      (set-middle-c! (lambda (midc glyph clef-adjust trans)
                       (set-prop! midc
-                        (cn-convert-middle-c-clef-position
-                         (hash-ref props glyph '())
-                         clef-adjust
-                         (hash-ref props trans '())))))
+                                 (cn-convert-middle-c-clef-position
+                                  (hash-ref props glyph '())
+                                  clef-adjust
+                                  (hash-ref props trans '())))))
      (changed? (lambda (prop equality-predicate)
                  (not (equality-predicate
                        (hash-ref props prop)
@@ -854,10 +923,12 @@ accidental-styles.none = #'(#t () ())
                             (ly:context-property context 'cnClefShift))))
 
              ;; Custom Clairnote props don't need conversion, just store them.
-             (if new-staff-octaves (hash-set! props 'cnStaffOctaves
-                                     (ly:context-property context 'cnStaffOctaves)))
-             (if new-clef-shift (hash-set! props 'cnClefShift
-                                  (ly:context-property context 'cnClefShift)))
+             (if new-staff-octaves
+                 (hash-set! props 'cnStaffOctaves
+                            (ly:context-property context 'cnStaffOctaves)))
+             (if new-clef-shift
+                 (hash-set! props 'cnClefShift
+                            (ly:context-property context 'cnClefShift)))
 
              ;; The order in which clef properties are set is important!
              (if new-clef (set-glyph! 'clefGlyph 'clefPosition))
@@ -868,20 +939,20 @@ accidental-styles.none = #'(#t () ())
                   (set-transposition! 'clefTransposition)
                   (set-position! 'clefPosition 'clefGlyph clef-adjust)
                   (set-middle-c! 'middleCClefPosition
-                    'clefGlyph clef-adjust 'clefTransposition)))
+                                 'clefGlyph clef-adjust 'clefTransposition)))
 
              (if (or new-cue new-staff-octaves new-clef-shift)
                  (begin
                   (set-transposition! 'cueClefTransposition)
                   (set-position! 'cueClefPosition 'cueClefGlyph clef-adjust)
                   (set-middle-c! 'middleCCuePosition
-                    'cueClefGlyph clef-adjust 'cueClefTransposition)))
+                                 'cueClefGlyph clef-adjust 'cueClefTransposition)))
 
              ;; Ottava, 8va, 8vb, etc.
              (if new-mid-c-offset
                  (set-prop! 'middleCOffset
-                   (cn-convert-middle-c-offset
-                    (ly:context-property context 'middleCOffset))))
+                            (cn-convert-middle-c-offset
+                             (ly:context-property context 'middleCOffset))))
 
              (ly:set-middle-C! context)
              )))))
@@ -890,7 +961,7 @@ accidental-styles.none = #'(#t () ())
      (acknowledgers
       ((clef-interface engraver grob source-engraver)
        (ly:grob-set-property! grob 'cn-clef-transposition
-         (ly:context-property context 'clefTransposition))))
+                              (ly:context-property context 'clefTransposition))))
      )))
 
 
@@ -899,7 +970,8 @@ accidental-styles.none = #'(#t () ())
 #(define cn-clef-curves
    ;; treble
    '(("clefs.G" .
-       (moveto 1.5506 4.76844
+       (
+         moveto 1.5506 4.76844
          curveto 1.5376 4.76844 1.5066 4.75114 1.5136 4.73384
          lineto 1.7544 4.17292
          curveto 1.8234 3.97367 1.8444 3.88334 1.8444 3.66416
@@ -925,7 +997,8 @@ accidental-styles.none = #'(#t () ())
 
      ;; bass
      ("clefs.F" .
-       (moveto 0.2656 0.78107
+       (
+         moveto 0.2656 0.78107
          curveto 0.3775 0.79547 0.4351 0.84567 0.7003 0.85587
          curveto 0.9459 0.86587 1.0531 0.85987 1.1805 0.83797
          curveto 1.6967 0.74937 2.1173 0.13032 2.1173 -0.64059
@@ -942,7 +1015,8 @@ accidental-styles.none = #'(#t () ())
 
      ;; alto
      ("clefs.C" .
-       (moveto 1.0406 2.93878
+       (
+         moveto 1.0406 2.93878
          curveto 0.9606 2.93578 0.8881 2.93178 0.8237 2.92878
          lineto 0.8237 2.92846
          curveto 0.6586 2.92046 0.4659 2.89806 0.3697 2.87906
@@ -981,8 +1055,8 @@ accidental-styles.none = #'(#t () ())
    ;; Returned stencils are centered horizontally, number must be 0-9.
    (ly:stencil-aligned-to
     (ly:font-get-glyph (ly:grob-default-font grob)
-      (list-ref '("zero" "one" "two" "three" "four"
-                   "five" "six" "seven" "eight" "nine") number))
+                       (list-ref '("zero" "one" "two" "three" "four"
+                                    "five" "six" "seven" "eight" "nine") number))
     X 0))
 
 #(define (cn-clef-number-shift glyph octave)
@@ -1012,8 +1086,8 @@ accidental-styles.none = #'(#t () ())
            ;; bass clef default octave is 3, treble and alto are 4
            (default-octave (if (string=? "clefs.F" glyph) 3 4))
            (octave (+ default-octave (/ transpo 12)))
-           (number-shift (map-pairs * (cons mag mag)
-                           (cn-clef-number-shift glyph octave)))
+           (number-shift (map-pair (lambda (x) (* x mag))
+                                   (cn-clef-number-shift glyph octave)))
            (scale 0.9)
            (number-stil (ly:stencil-translate
                          (ly:stencil-scale
@@ -1030,7 +1104,7 @@ accidental-styles.none = #'(#t () ())
                 empty-stencil))
 
            (combined-stil (ly:stencil-add scaled-curve
-                            number-stil 2nd-number-stil))
+                                          number-stil 2nd-number-stil))
            ;; 'glyph-name is e.g. "clefs.G_change"
            ;; when 'glyph is just "clefs.G"
            (glyph-name (ly:grob-property grob 'glyph-name)))
@@ -1051,34 +1125,35 @@ accidental-styles.none = #'(#t () ())
 %% adjust the position of dots in repeat signs
 %% for Clairnote staff or traditional staff
 
-#(add-bar-glyph-print-procedure ":"
-   (lambda (grob extent)
-     ;; A procedure that draws repeat sign dots at
-     ;; @code{dot-positions}. The coordinates are the same as
-     ;; @code{StaffSymbol.line-positions}, a dot-position of X
-     ;; is equivalent to a line-position of X.
-     (let*
-      ((staff-sym (ly:grob-object grob 'staff-symbol))
-       (is-clairnote-staff
-        (if (ly:grob? staff-sym)
-            (ly:grob-property staff-sym 'cn-is-clairnote-staff)
-            #t))
-       (odd-octaves
-        (if (ly:grob? staff-sym)
-            (member -2 (ly:grob-property staff-sym 'line-positions))
-            #f))
-       (dot-positions
-        (if is-clairnote-staff
-            (if odd-octaves '(4 8) '(-2 2))
-            '(-1 1)))
-       (staff-space (ly:staff-symbol-staff-space grob))
-       (dot (ly:font-get-glyph (ly:grob-default-font grob) "dots.dot")))
-      (fold
-       (lambda (dp prev)
-         (ly:stencil-add prev
-           (ly:stencil-translate-axis dot (* dp (/ staff-space 2)) Y)))
-       empty-stencil
-       dot-positions))))
+#(add-bar-glyph-print-procedure
+  ":"
+  (lambda (grob extent)
+    ;; A procedure that draws repeat sign dots at
+    ;; @code{dot-positions}. The coordinates are the same as
+    ;; @code{StaffSymbol.line-positions}, a dot-position of X
+    ;; is equivalent to a line-position of X.
+    (let*
+     ((staff-sym (ly:grob-object grob 'staff-symbol))
+      (is-clairnote-staff
+       (if (ly:grob? staff-sym)
+           (ly:grob-property staff-sym 'cn-is-clairnote-staff)
+           #t))
+      (odd-octaves
+       (if (ly:grob? staff-sym)
+           (member -2 (ly:grob-property staff-sym 'line-positions))
+           #f))
+      (dot-positions
+       (if is-clairnote-staff
+           (if odd-octaves '(4 8) '(-2 2))
+           '(-1 1)))
+      (staff-space (ly:staff-symbol-staff-space grob))
+      (dot (ly:font-get-glyph (ly:grob-default-font grob) "dots.dot")))
+     (fold
+      (lambda (dp prev)
+        (ly:stencil-add prev
+                        (ly:stencil-translate-axis dot (* dp (/ staff-space 2)) Y)))
+      empty-stencil
+      dot-positions))))
 
 
 %--- TIME SIGNATURES ----------------
@@ -1125,8 +1200,8 @@ accidental-styles.none = #'(#t () ())
                      (if (comparator this-edge prev-edge)
                          this-edge
                          prev-edge)))
-             (cn-grob-edge (car grobs) positive)
-             (cdr grobs))))
+                 (cn-grob-edge (car grobs) positive)
+                 (cdr grobs))))
      final-edge))
 
 #(define (cn-double-stem grob)
@@ -1176,11 +1251,11 @@ accidental-styles.none = #'(#t () ())
      (stem2-stil (ly:round-filled-box stem2-x-extent stem2-y-extent blot)))
 
     (ly:grob-set-property! grob 'stencil
-      (ly:stencil-add stem-stil stem2-stil))
+                           (ly:stencil-add stem-stil stem2-stil))
     ;; X-extent needs to be set here because its usual callback
     ;; ly:stem::width doesn't take the actual stencil width into account
     (ly:grob-set-property! grob 'X-extent
-      (ly:stencil-extent (ly:grob-property grob 'stencil) 0))
+                           (ly:stencil-extent (ly:grob-property grob 'stencil) 0))
     ))
 
 #(define (cn-multiply-details details multiplier skip-list)
@@ -1246,11 +1321,11 @@ accidental-styles.none = #'(#t () ())
          (and
           ;; Horizontal positions of the stems must be almost the same
           (close-enough? (car (ly:grob-extent root ref X))
-            (car (ly:grob-extent stem ref X)))
+                         (car (ly:grob-extent stem ref X)))
           ;; The stem must be in the direction away from the root's notehead
           (positive? (* (ly:grob-property root 'direction)
-                       (- (car (ly:grob-extent stem ref Y))
-                         (car (ly:grob-extent root ref Y))))))))
+                        (- (car (ly:grob-extent stem ref Y))
+                           (car (ly:grob-extent root ref Y))))))))
 
    (define (stem-span-stencil span)
      ;; Connect stems if we have at least one stem connectable to the root
@@ -1281,7 +1356,7 @@ accidental-styles.none = #'(#t () ())
                   ;; Hide spanned stems
                   (for-each (lambda (st)
                               (set! (ly:grob-property st 'stencil) #f))
-                    stems)
+                            stems)
                   ;; Draw a nice looking stem with rounded corners
                   (ly:round-filled-box (ly:grob-extent root root X) yextent blot))))
 
@@ -1495,7 +1570,7 @@ accidental-styles.none = #'(#t () ())
      ;; shorten the furthest ledger, the first in the list.
      ;; So we merge into one list, keeping descending order
      (ledger-list (fold (lambda (lst result) (merge lst result >))
-                    '() ledger-lists))
+                        '() ledger-lists))
      ;; But if the note is on a ledger, move that ledger to the
      ;; front of the list, so that ledger will be shortened.
      (ledger-list2 (if (memv dist ledger-list)
@@ -1516,8 +1591,8 @@ accidental-styles.none = #'(#t () ())
                  (if (< (abs (- line pos)) (abs (- prev pos)))
                      line
                      prev))
-           (car lines)
-           (cdr lines)))
+               (car lines)
+               (cdr lines)))
 
         (diff (- pos nearest-line))
         (dist (abs diff))
@@ -1527,7 +1602,7 @@ accidental-styles.none = #'(#t () ())
         ;; they are relative to nearest-line and in the right direction
         (ledgers0 (cn-ledger-pattern dist staff-symbol))
         (ledgers1 (map (lambda (n) (+ nearest-line (* dir n)))
-                    ledgers0))
+                       ledgers0))
 
         ;; remove any ledgers that would fall on staff lines
         (ledgers2 (filter (lambda (n) (not (member n lines)))
@@ -1548,7 +1623,7 @@ accidental-styles.none = #'(#t () ())
 
      (staff-symbol (ly:grob-object grob 'staff-symbol))
      (ledger-function (eval cn-ledger-positions
-                        (interaction-environment)))
+                            (interaction-environment)))
      (ledger-posns (ledger-function staff-symbol nh-pos))
 
      (max-or-min (if (> direction 0) max min))
@@ -1567,10 +1642,11 @@ accidental-styles.none = #'(#t () ())
 
 #(define (cn-get-new-staff-positions posns base-positions going-up going-down)
 
-   (define recurser (lambda (proc posns extension n)
-                      (if (<= n 0)
-                          posns
-                          (recurser proc (proc posns extension) extension (- n 1)))))
+   (define recurser
+     (lambda (proc posns extension n)
+       (if (<= n 0)
+           posns
+           (recurser proc (proc posns extension) extension (- n 1)))))
 
    (define (extend-up posns extension)
      (let ((furthest (reduce max '() posns)))
@@ -1630,8 +1706,11 @@ accidental-styles.none = #'(#t () ())
                ;; base is '(-8 -4) or '(-2 2) for Clairnote
                (base-lines (ly:context-property context 'cnBaseStaffLines))
                (posns (if reset base-lines current-lines))
-               (new-posns (cn-get-new-staff-positions posns base-lines going-up going-down)))
-              (ly:context-pushpop-property context 'StaffSymbol 'line-positions new-posns))))
+               (new-posns (cn-get-new-staff-positions
+                           posns base-lines going-up going-down)))
+
+              (ly:context-pushpop-property
+               context 'StaffSymbol 'line-positions new-posns))))
       \stopStaff
       \startStaff
     #}))
@@ -1778,13 +1857,19 @@ accidental-styles.none = #'(#t () ())
   ;; Some values need to be accessed by both custom engravers and grob
   ;; callbacks so they are kept in both grob and context properties.
 
-  ;; For accidental signs, stores a version of localAlterations
-  ;; keyed by semitone instead of by (octave . notename)
+  ;; For accidental signs. Stores a modified version of LilyPond's
+  ;; `localAlterations` context property that differs in two ways:
+  ;;   1. key signature entries have been omitted
+  ;;   2. remaining accidental entries have this form (keyed by semitone):
+  ;;         (semitone alter barnum . end-moment))
+  ;;     instead of this form:
+  ;;         ((octave . notename) . (alter barnum . end-moment))
   (context-prop 'cnSemiAlterations list?)
 
-  ;; For accidental signs, stores alterations keyed by
-  ;; (octave . notename).  Needed for looking up alterations to
-  ;; calculate semitones for invalidated entries in localAlterations.
+  ;; For accidental signs. Stores entries that have the form:
+  ;;     ((octave . notename) . alter)
+  ;; Needed for storing and looking up alter values to calculate semitones for
+  ;; invalidated entries in LilyPond's context property `localAlterations`.
   (context-prop 'cnAlterations list?)
 
   ;; Stores the base staff line positions used for extending the staff
@@ -1820,7 +1905,11 @@ accidental-styles.none = #'(#t () ())
   (grob-prop 'cn-double-stem-width-scale non-zero?)
 
   ;; Used to produce ledger line pattern.
-  (grob-prop 'cn-ledger-recipe list?))
+  (grob-prop 'cn-ledger-recipe list?)
+
+  ;; Used for directional natural accidental signs.
+  ;; The value is "natural-down" or "natural-up".
+  (grob-prop 'cn-natural-sign-direction string?))
 
 
 %--- STAFF CONTEXT DEFINITION ----------------
@@ -1937,6 +2026,11 @@ clairnoteTypeUrl = ""
     % which does not need to be consisted here.
     \consists \Cn_clef_ottava_engraver
     \consists \Cn_key_signature_engraver
+
+    % We put all engravers before Cn_accidental_engraver because we got segfault
+    % crashes otherwise. Probably because it used to call ly:grob-suicide! on
+    % some accidental grobs when acknowledging rather than finalizing.
+    \consists \Cn_accidental_engraver
   }
 
   \context {

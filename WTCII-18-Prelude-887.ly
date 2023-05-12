@@ -57,8 +57,10 @@ upper = \new Voice \relative c' {
   
    % bar 9
    ais8-4 gis 				r16 fis-2 e dis-3 			cis bis cis e				dis cis dis fis-5			|
-   fis8-5 e					r16 dis-3 cis b-1			ais-3 gis ais-4 cis 			bis ais bis dis-5			|
-   gis,-2 fisis gis b			ais gis ais cis				fisis, e'-4 dis cis			ais' cis, ais' cis,			|
+   fis8-5 e					r16 dis-3 cis b-1			\change Staff = "down"  \stemUp ais-3 gis  ais-4 cis 			
+                                                                                                                                                       bis ais bis dis-5			|
+   gis,-2 fisis gis b			ais gis ais cis				fisis, \change Staff = "up" e'-4 dis cis			
+                                                                                                                                                       ais' cis, ais' cis,			|
    bis-1 a'-4 gis fis			dis' fis, dis' fis, 				eis d-3 cis b				gis' b, gis' b,			|
    
    % bar 13
@@ -146,9 +148,9 @@ lower = \new Voice \relative c {
   
   % bar 9
   bis16 dis eis fisis		gis8 b,				ais fisis'!					fis a,					|
-  gis16 bis cis dis		e8 gis,				fisis e'					dis fis,				|	
+  gis16 bis cis dis		e8 gis,				\stemDown fisis e'					dis fis,				|	
   eis d' 				cis e,					dis eis 					fisis dis				|
-  gis ais				bis gis				cis dis					eis cis				|
+  \stemNeutral gis ais				bis gis				cis dis					eis cis				|
   
   %bar 13
   fis gis 				ais fis				b ais						gis fis				|
@@ -199,14 +201,17 @@ lower = \new Voice \relative c {
 \score {
   \articulate
   \new PianoStaff <<
-    \new Staff="up" 
+ 
+
+ \new Staff="up" 
     << \global \clef treble
-       \upper 
-     >>
-    \new Staff="down" 
+
+ \upper 
+      >>
+   \new Staff="down" 
     << \global \clef treble
        \lower
-     >>
+      >>
   >>  
   \midi { \tempo 4=72 }
   
@@ -217,15 +222,15 @@ lower = \new Voice \relative c {
 % Printed score
 \score {
   \new PianoStaff << 
-    	\set PianoStaff.midiInstrument = "harpsichord"
+         	\set PianoStaff.midiInstrument = "harpsichord"
     \new Staff="up"
-    << \global \clef treble
+     << \global \clef treble
        \upper 
-     >>
+      >>
     \new Staff="down"
-    << \global \clef bass
-       \lower
-     >>
+     << \global \clef bass
+      \lower
+      >>
   >>
   \layout { }
 }
