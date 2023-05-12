@@ -19,17 +19,19 @@ global = {
   \time 4/4
   \accidentalStyle default
 }
-
+#(set-global-staff-size 18)
 \paper {
    ragged-bottom = ##f
    ragged-last-bottom = ##f
+   system-system-spacing.padding = 0
 }
 \include "articulate.ly"
 
 
 clairnote-type = dn
-% \include "include/clairnote.ly"
+\include "include/clairnote.ly"
 
+lfo=\once \set fingeringOrientations=#'(left) 
 
 lhMark = \markup { 
   \path #0.1 #'((moveto -1 0)(rlineto 0 1.5)(rlineto 0.5 0))
@@ -44,24 +46,25 @@ upper = \new Voice \relative c' {
     r8 <gis b> 				\appoggiatura <gis b> <ais cis>4  		
                                                                                                       r8 <gis b> 				\appoggiatura <gis b> <fisis ais>4	|
   gis16_\markup {\italic "piano"} ais b cis 		
-                                                   dis b ais gis  				fisis gis ais e              		dis r16 r8 				  		|
+                                                   dis b ais gis  				fisis gis ais e              		\once \set fingeringOrientations=#'(left) <dis \finger"⸢"> r16 r8 				  		|
   r8 <b' gis'-4> 			\appoggiatura <b gis'> <cis ais'>4  		
                                                                                                       r8 <b gis'-5> 				\appoggiatura <b gis'> <ais fisis'>4	|
  
   % bar 5
-  r8 <gis b-4>16_\markup {\italic "forte"} <fisis ais> 
+  r8 <gis-3 b-4>16_\markup {\italic "forte"}  <fisis ais> 
                                                    <gis b>8 <b-1 gis'-5> 		r8 <gis b>8 				r8 << {ais16 gis} \\ eis8>> 		|
   r8 <fis ais-4>16 <eis gis> 	<fis ais>8 <ais-2 fis'-5> 		r8 <ais fis>8 				r8 << {gis16 fis} \\ dis8>> 		|
   r8 <cisis gis'-4>16 <dis fis> 	<eis-1 gis-4>8 <gis eis'>		 r8 <eis gis>8 				r8 << {fis16-4 eis} \\ cisis!8>> 		|
   <dis-2 fis-4>4			r16 ais'-4 gis fis			eis-1 dis-2 eis-1 gis 				fisis eis fisis ais |  
   
    % bar 9
-   ais8-4 gis 				r16 fis-2 e dis-3 			cis bis cis e				dis cis dis fis-5			|
-   fis8-5 e					r16 dis-3 cis b-1			\change Staff = "down"  \stemUp ais-3 gis  ais-4 cis 			
+   ais8-4 gis 				r16 fis-2 e dis-3 			cis bis cis e				dis cis dis \lfo <fis\finger 5>			|
+   fis8-5 e					r16 dis-3 cis b-1			\change Staff = "down"  \stemUp 
+                                                                                                       \lfo <ais \finger 3> gis  ais-4 cis 			
                                                                                                                                                        bis ais bis dis-5			|
    gis,-2 fisis gis b			ais gis ais cis				fisis, \change Staff = "up" e'-4 dis cis			
                                                                                                                                                        ais' cis, ais' cis,			|
-   bis-1 a'-4 gis fis			dis' fis, dis' fis, 				eis d-3 cis b				gis' b, gis' b,			|
+   bis_1 a'_4 gis fis			dis' fis, dis' fis, 				eis d-3 cis b				gis' b, gis' b,			|
    
    % bar 13
    ais-2 g'-5 fis-3 e-1		cis' e, cis' e,-2				dis fis gis ais				b fis-2 eis-1 dis-2		|
@@ -76,30 +79,30 @@ upper = \new Voice \relative c' {
    
    <<
      {\voiceOne
-       b,8 r8					cis r8					dis r8 					ais r8   				|
-        r8 eis'16 dis			eis8	gis					cisis, eis					ais,4~				|
+       b,8-1 r8					cis r8					dis r8 					ais-4 r8   				|
+        r8 eis'16 dis			eis8	gis					cisis, eis					ais,4~-4				|
         
         %bar 21
-        ais8 ais16 gis			ais8 fis'8					r8 dis					r8 bis				|
+        ais8 ais16-4 gis			ais8 fis'8-5					r8 dis					r8 bis				|
         r8 gis16 fis			gis8 eis'8					r8 cis					r8 ais				|
         r8 gisis				ais dis					r8 dis 					cisis b'				|
-        ais4 					r16 ais eis gis				gis8 fisis					r4					|
+        ais4-4 					r16 ais eis gis				gis8 fisis					r4					|
      }
      \new Voice \relative c' {
        \voiceTwo 
-        r8 dis				dis16 cisis dis8				r8 e32 dis cisis16				dis8 dis'			|
-        gis,2~										gis8. fis16					eis dis eis cisis			|
+        r8 dis				dis16\trill cisis dis8				r8 e32 dis cisis16				dis8 dis'			|
+        gis,2~										gis8. fis16					eis_1 dis_2 eis cisis			|
         
         %bar 21
-        dis8 fis16 eis			fis8 ais					r8 fis						r8 eis16 dis			|
+        dis8 fis16-2 eis			fis8 ais-1					r8 fis						r8 eis16 dis			|
         r8 eis16 dis			eis8	gis					r8 eis					r8 dis16 cisis			|
         r8 fis16 eis				fis dis  bis'8				r8 bis16 ais 				b gis gis'8~			|
-        gis8 fis32 eis dis16		cisis4~					cisis8 dis					r4					 
+        gis8 fis32-2 eis dis16-2		cisis4~					cisis8 dis					r4					 
      }
       >> \bar ":|.|:"
 
       %bar 25
-      dis16 eis fisis gis			ais e-1 dis-3 cis			bis cis dis a-1				gis-3 fis e dis			|
+      dis16 eis fisis gis			ais e-1 dis-3 cis			bis cis dis a-1				gis-3 fis e dis-2			|
       e-1 cis' e, cis'			eis, d' eis, d'				cis a-1 gis-3 fis				eis d'cis b				|
       ais b-1 cis dis 			e b a-4 gis				fisis gis ais e				dis-3 cis b ais-2		|
       b-1 gis'-4 b, gis'			bis,-1 a'-5 bis, a'			gis e-1 dis-3 cis			b a'-5 gis fis			|
@@ -156,11 +159,11 @@ upper = \new Voice \relative c' {
      <<
        {
          \voiceOne
-          fisis dis gis ais			<gis-3 b-5>8[	<fisis~-3 ais~-4>] 		
+          fisis dis gis ais			b8-5[	< fisis~ ais~-4>] 		
                                                                                                      <fisis ais>  <dis gis> 		r4					|
        }
        \new Voice{
-         \voiceTwo s8 gis8~ 		
+         \voiceTwo s8 gis8~ 		\lfo <gis \finger 3>
        }
        \new Voice{
          \voiceFour r16 dis8.~ 	dis16 dis8 cis16~			cis8 	b					r4					    
@@ -179,28 +182,28 @@ upper = \new Voice \relative c' {
 
 
 lower = \new Voice \relative c {
-
+\set fingeringOrientations = #'(down) 
   <gis' b dis>4			r4 					<gis ais cis>				r16 cis b ais	 		|
-  gis-5 dis' gis, dis'           	fisis,-5 dis' fisis, dis'           gis,-4 dis' gis, dis'      	 	dis,-5 dis' dis, dis'		  	|
+  gis_5 dis' gis, dis'           	fisis,_5 dis' fisis, dis'           gis,_4 dis' gis, dis'      	 	dis,_5 dis' dis, dis'		|
   <gis, b dis>4		   	r4 					<gis ais cis> 				r16 cis b ais	 		|
   gis dis' gis, dis'           	fisis, dis' fisis, dis'           	gis, dis' gis, dis'      	 		dis, dis' dis, dis'		  	|
   
   % bar 5
-  gis, dis' gis, dis'         	fis, dis' fis, dis'           	eis, cis' eis, cis'      	 		cis, cis' cis, cis'		  	|
-  fis, cis' fis, cis'           	e, cis' e, cis'           		dis, b' dis, b'      	 		b, b' b, b'		  		|
-  eis, b' eis, b'      	 	dis, b' dis, b'			cisis, ais' cisis, ais'			ais, ais' ais, ais'			|
-  dis, fis gis ais			b8 dis,8				cisis b'					ais cis, 				|
+  gis,_3 dis' gis, dis'         	fis,_4 dis' fis, dis'           	eis,_4 cis' eis, cis'      	 		cis, cis' cis, cis'		  	|
+  fis,_3 cis' fis, cis'           	e, cis' e, cis'           		dis,_4 b' dis, b'      	 		b, b' b, b'		  		|
+  eis,_3 b' eis, b'      	 	dis, b' dis, b'			cisis,_4 ais' cisis, ais'			ais, ais' ais, ais'			|
+  dis,_5 fis gis ais		b8 dis,8_4				cisis b'					<ais\finger "2--1"> cis,_4 	|
   
   % bar 9
-  bis16 dis eis fisis		gis8 b,				ais fisis'!					fis a,					|
-  gis16 bis cis dis		e8 gis,				\stemDown fisis e'					dis fis,				|	
-  eis d' 				cis e,					dis eis 					fisis dis				|
-  \stemNeutral gis ais				bis gis				cis dis					eis cis				|
+  bis16 dis_3 eis_2 fisis_1	gis8_2 b,_5			ais_4 fisis'					fis a,_5				|
+  gis16_4 bis_1 cis_3 dis	e8 gis,				\stemDown fisis_5 e'			<dis\finger "2--1"> fis,_4	|	
+  eis_5 d' 				cis e,_5				dis_3 eis 					fisis dis_5				|
+  \stemNeutral gis ais	bis gis_5				cis dis					eis cis_5				|
   
   %bar 13
-  fis gis 				ais fis				b ais						gis fis				|
-  eis gis				cisis, ais				dis cis 					bis ais				|
-  bis dis				gisis, eis				ais' r8					\clef treble r16 gis' fis eis  |
+  fis gis 				ais fis_4				b ais						gis fis				|
+  eis gis				cisis,_3 ais_5			dis_1 cis 					bis ais				|
+  bis dis				gisis,_3 eis			ais' r8				\clef treble r16 gis'_2 fis eis  |
   dis eis fis gis			ais fis eis dis			cisis dis eis b				\clef bass ais gis fis eis     |
   
   %bar 17
@@ -213,41 +216,41 @@ lower = \new Voice \relative c {
   dis fis dis fis			cis ais' cis, ais'			bis, gis' bis, gis'				gis, gis' gis, fis'			|
   cis eis cis eis			b gis' b, gis'			ais, fis' ais, fis' 				fis, fis' fis, eis'			|
   bis dis bis dis			ais fis' ais, fis' 			gisis, eis' gisis, eis'			eis, eis' eis, dis'			|
-  cisis ais dis fis			ais8 ais, 				dis,8. fisis32 ais				dis4					|
+  cisis_3 ais dis fis			ais8 ais, 				dis,8. fisis32 ais				dis4					|
   
   %bar 25
-  r8 dis16-5 eis			fisis8 ais				dis cis 					bis gis-5				| 
-  cis cis, 				b b'					a a,						gis gis'				|
-  fis fis,				cis' e					ais,-4 cis-2				fisis,-5 dis'-2			|
+  r8 dis16_5 eis			fisis8 ais				dis cis 					bis gis_5				| 
+  cis_1 cis,_4 			b b'					a a,_4					gis gis'				|
+  fis fis,				cis' e					ais,_4 cis_2				fisis,_5 dis'_2			|
   gis gis, 				fis fis'				e e,						dis dis'				|
   
   %bar 29
   cis8 cis,				r16 cis'' dis eis			fis8 fis,					r16 fis gis ais			|
   b8 b,				r16 b cis dis			e8 e,						r16 e fis gis			|
   a e' a, e'				gis, e' a, e'				a, e' a, e'					eis, d' eis, d'			|
-  fis, cis' fis, cis'			e, cis' e, cis'			dis, fisis ais cis-1			b ais gis fisis-5			|
+  fis, cis' fis, cis'			e, cis' e, cis'			dis, fisis ais cis_1			b ais gis fisis_5			|
   
   %bar 33
-  gis dis' gis, dis'		fis, dis' fis, dis'			eis, gisis bis dis-1			cis bis ais gisis-5		|
-  ais8 bis				cisis ais-5				dis eis 					fisis dis-5				|
-  gis ais				bis gis-5				cis dis					eis cis-4				|
-  fis4-2				r16 eis-1 dis cis		bis ais bis dis				cisis bis cisis eis			|
+  gis dis' gis, dis'		fis, dis' fis, dis'			eis, gisis bis dis_1			cis bis ais gisis_5		|
+  ais8 bis				cisis ais_5				dis eis 					fisis dis_5				|
+  gis ais				bis gis_5				cis dis					eis cis_4				|
+  fis4_2				r16 eis_1 dis cis			bis ais bis dis				cisis bis cisis eis			|
   
   %bar 37
-  eis8 dis				cis16-2 b-1 ais gis		gis fisis gis b				ais-3 gis ais cis			|
-  cis8 b				r16 ais-1 gis fis			eis dis eis gis				fisis eis fisis ais			|
-  dis,-3 cisis dis fis		e dis e gis				cisis,-4 bis cisis eis			dis cisis dis fis			|
-  bis,-4 ais bis dis		cis bis cis e			ais, b cis b					cis fisis ais cis,			|
+  eis8 dis				cis16_2 b_1 ais gis		gis fisis gis b				ais_3 gis ais cis			|
+  cis8 b				r16 ais_1 gis fis			eis dis eis gis				fisis eis fisis ais			|
+  dis,_3 cisis dis fis		e dis e gis				cisis,_4 bis cisis eis			dis cisis dis fis			|
+  bis,_4 ais bis dis		cis bis cis e			ais, b cis b					cis fisis ais cis,			|
   
   %bar 41
-  b-1 ais gis ais			b cis-3 dis e			e8-4 fisis,					r16 cis'' b ais			|
+  b_1 ais gis ais			b cis_3 dis e			e8_4 fisis,					r16 cis'' b ais			|
   gis dis' gis, dis' 		fisis, dis' fisis, dis' 		gis, dis' gis, dis'				dis, dis' dis, dis'			|
-  gis,-3 ais b cis-3		dis b-1 ais gis			fisis gis ais e-1 				dis cis b-1 ais-4		|
+  gis,_3 ais b cis_3		dis b_1 ais gis			fisis gis ais e_1 				dis cis b_1 ais_4		|
   gis gis' gis, gis'		fis dis' fis, dis'			e, cis' e, cis'				dis, bis' dis, bis'			|
   
   %bar 45
   cis, cis' cis, cis'			\clef treble b gis' b, gis'     ais, fisis' ais, fisis'			gis, gis' gis, gis'			|
-  fisis-3 gis ais e-2 		\clef bass dis cis b-1 ais 	gis8 b 					cis-3 dis				|
+  fisis_3 gis ais e_2 		\clef bass dis cis b_1 ais 	gis8 b 					cis_3 dis				|
   e e,					r8 <bis dis a'>			r8 <<
                                                                                         {\voiceOne gis'}
                                                                                         \new Voice {
