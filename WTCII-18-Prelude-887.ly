@@ -124,6 +124,15 @@ upper = \new Voice \relative c' {
       bis a'					gis b,-1					ais-2 gis'-5				fisis-5 a,-1			|
       gis-2 fis' 				eis <gis, e'>	 			<gis e'> <fisis dis'>			r4					|
      
+     %bar 41
+     gis'16-1 ais  b cis			dis b-4 ais gis				fisis gis ais e				dis r16 r8				|
+     r8 <b' gis'> 				\appoggiatura <b gis'> <cis ais'>4			
+                                                                                                     r8 <b gis'> 				\appoggiatura <b gis'> <ais fisis'>4  |
+     r16 fisis gis ais 			b32 ais gis16 <cis e> 8		<cis e>8 <fisis, dis'>			r4					|		
+     r8 <gis b> 				<a cis> <gis bis>			r8 <gis cis> 				<a fis'> <fis dis'>		|
+     
+     %bar 45
+     r8 <gis e>				<d fis> <cis eis>			
      }
    >> \oneVoice
    
@@ -193,6 +202,12 @@ lower = \new Voice \relative c {
   cis8 b				r16 ais-1 gis fis			eis dis eis gis				fisis eis fisis ais			|
   dis,-3 cisis dis fis		e dis e gis				cisis,-4 bis cisis eis			dis cisis dis fis			|
   bis,-4 ais bis dis		cis bis cis e			ais, b cis b					cis fisis ais cis,			|
+  
+  %bar 41
+  b-1 ais gis ais			b cis-3 dis e			e8-4 fisis,					r16 cis'' b ais			|
+  gis dis' gis, dis' 		fisis, dis' fisis, dis' 		gis, dis' gis, dis'				dis, dis' dis, dis'			|
+  gis,-3 ais b cis-3		dis b-1 ais gis			fisis gis ais e-1 				dis cis b-1 ais-4		|
+  gis gis' gis, gis'		fis dis' fis, dis'			e, cis' e, cis'				dis, bis' dis, bis'			|
 }
 
 
