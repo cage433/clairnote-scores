@@ -77,7 +77,7 @@ upper = \new Voice \relative c' {
    <<
      {\voiceOne
        b,8 r8					cis r8					dis r8 					ais r8   				|
-        r8 eis16 dis			eis8	gis					cisis, eis					ais,4~				|
+        r8 eis'16 dis			eis8	gis					cisis, eis					ais,4~				|
         
         %bar 21
         ais8 ais16 gis			ais8 fis'8					r8 dis					r8 bis				|
