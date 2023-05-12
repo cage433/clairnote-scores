@@ -92,7 +92,7 @@ upper = \new Voice \relative c' {
         dis8 fis16 eis			fis8 ais					r8 fis						r8 eis16 dis			|
         r8 eis16 dis			eis8	gis					r8 eis					r8 dis16 cisis			|
         r8 fis16 eis				fis dis  bis'8				r8 bis16 ais 				b gis gis'8~			|
-        gis8 fis32 eis dis16		cisis4~					cisis8 dis					r4					|
+        gis8 fis32 eis dis16		cisis4~					cisis8 dis					r4					\bar ":|." 
 
 
       %bar 25
@@ -100,6 +100,22 @@ upper = \new Voice \relative c' {
       e-1 cis' e, cis'			eis, d' eis, d'				cis a-1 gis-3 fis				eis d'cis b				|
       ais b-1 cis dis 			e b a-4 gis				fisis gis ais e				dis-3 cis b ais-2		|
       b-1 gis'-4 b, gis'			bis,-1 a'-5 bis, a'			gis e-1 dis-3 cis			b a'-5 gis fis			|
+      
+      %bar 29
+      eis fis gis a-1			b d cis b-1				ais-3 b cis g-3				fis e dis-3 cis			|
+      dis e-1 fis gis			a-1 cis b ais				gis-3 ais b fis				e d-3 cis b			|
+      cis8-2 <cis-1 a'-4>		\appoggiatura <cis a'> <d b'>4
+                                                                                                     r8 <cis a'> 				\appoggiatura <cis a'> <b gis'>4 |
+      r8 <a-1 fis'-3>16 <b-1 gis'-4>		
+                                                  <cis a'>8 <gis'-2 cis-4> 		r8 <fisis-1 e'-5>			<gis dis'> <ais-2 cis-3>	|
+                                                  
+      %bar 33
+      r8 <gis b>16 <fisis ais>	<gis b>8 <ais dis>			r8 <gisis-1 fis'-5>			<ais-2 eis'-5> <bis-3 dis-4> 	|
+      <eis,-1 cisis'-5>16 b' ais gis	
+                                                  eis' gis, eis' gis,				fisis e' dis cis				ais' cis, ais' cis,			|
+      bis-1 a-3 gis fis			dis' fis,-2 dis' fis, 			eis d' cis b-1				gis' b, gis' b,-2			|
+      ais cis dis eis			fis8 ais,-2					gisis fis'-5					e-5 gis,				|
+     
      }
    >> \oneVoice
    
@@ -151,6 +167,18 @@ lower = \new Voice \relative c {
   cis cis, 				b b'					a a,						gis gis'				|
   fis fis,				cis' e					ais,-4 cis-2				fisis,-5 dis'-2			|
   gis gis, 				fis fis'				e e,						dis dis'				|
+  
+  %bar 29
+  cis8 cis,				r16 cis'' dis eis			fis8 fis,					r16 fis gis ais			|
+  b8 b,				r16 b cis dis			e8 e,						r16 e fis gis			|
+  a e' a, e'				gis, e' a, e'				a, e' a, e'					eis, d' eis, d'			|
+  fis, cis' fis, cis'			e, cis' e, cis'			dis, fisis ais cis-1			b ais gis fisis-5			|
+  
+  %bar 33
+  gis dis' gis, dis'		fis, dis' fis, dis'			eis, gisis bis dis-1			cis bis ais gisis-5		|
+  ais8 bis				cisis ais-5				dis eis 					fisis dis-5				|
+  gis ais				bis gis-5				cis dis					eis cis-4				|
+  fis4-2				r16 eis-1 dis cis		bis ais bis dis				cisis bis cisis eis			|
 }
 
 
