@@ -29,24 +29,43 @@ global = {
 
 
 clairnote-type = dn
-\include "include/clairnote.ly"
+%\include "include/clairnote.ly"
 
 lfo=\once \set fingeringOrientations=#'(left) 
 
+positionHandMark = 
+#(define-scheme-function 
+   (offset)
+   (pair?)
+      #{
+        \once \set fingeringOrientations=#'(left) 
+        \once \override Fingering.extra-offset= $offset  
+      #}
+      )
+makeHandMark = 
+#(define-scheme-function 
+   (mark offset note)
+   (markup? pair? ly:music?)
+      #{
+        \once \set fingeringOrientations=#'(left) 
+        \once \override Fingering.extra-offset= $offset  
+        < $note \finger $mark >
+      #}
+      )
 lhMark = \markup { 
-  \path #0.1 #'((moveto -1 0)(rlineto 0 1.5)(rlineto 0.5 0))
+  \path #0.3 #'((rlineto 0 3.0)(rlineto 1.5 0))
 }
 rhMark = \markup { 
-  \path #0.1 #'((moveto -1 0)(rlineto 0 -1.5)(rlineto 0.5 0))
+  \path #0.3 #'((rlineto 0.0 -3.0)(rlineto 1.5 0))
 }
                  
 upper = \new Voice \relative c' {
 
-    <gis'-2>16   ais b-1 cis 	dis b-1 ais gis  				fisis gis ais e-1              		\once \set fingeringOrientations=#'(left) <dis \finger"⸢"> r16 r8 				 		|
+    <gis'-2>16   ais b-1 cis 	dis b-1 ais gis  				fisis gis ais e-1              		\makeHandMark \rhMark #'(1.2 . 0.0) dis r16 r8 				 		|
     r8 <gis b> 				\appoggiatura <gis b> <ais cis>4  		
                                                                                                       r8 <gis b> 				\appoggiatura <gis b> <fisis ais>4	|
   gis16_\markup {\italic "piano"} ais b cis 		
-                                                   dis b ais gis  				fisis gis ais e              		\once \set fingeringOrientations=#'(left) <dis \finger"⸢"> r16 r8 				  		|
+                                                   dis b ais gis  				fisis gis ais e              		 \makeHandMark \lhMark #'(1.2 . 0.5)  dis r16 r8 				  		|
   r8 <b' gis'-4> 			\appoggiatura <b gis'> <cis ais'>4  		
                                                                                                       r8 <b gis'-5> 				\appoggiatura <b gis'> <ais fisis'>4	|
  
